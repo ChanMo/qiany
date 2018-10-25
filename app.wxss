@@ -11,42 +11,45 @@
  * darkgrey: #5c5c5c text
  */
 
-:root {
-  --primary: #7a3ce9;
-}
-
 page {
   background: #f5f5f5;
-}
-
-text {
-  color: #202021;
-  font-size: 32rpx;
-  font-size: 16px;
-}
-.text {
-  color: #202021;
-  font-size: 32rpx;
-  font-size: 16px;
-}
-.text-white {
-  color: white;
-}
-.text-primary {
-  color: #7a3ce9;
-  font-size: 32rpx;
-}
-.text-secondary {
-  color: #505050;
-  font-size: 32rpx;
-}
-.text-grey {
-  font-weight: 200;
-  color: #a6a4a9;
-}
-.text-small {
   font-size: 14px;
 }
+
+.mb5 {
+  margin-bottom: 5px;
+}
+.mb10 {
+  margin-bottom: 10px;
+}
+.border-primary {
+  border-color: #7a3ce9 !important;
+}
+.bg-primary {
+  background-color: #7a3ce9 !important;
+}
+
+/**
+ * button
+ */
+.button {
+  display: inline-block;
+  border-radius: 2px;
+  padding: 5px 20px;
+  font-size: 14px;
+}
+.button-big {
+  padding: 15px 30px !important;
+}
+.button-small {
+  font-size: 12px !important;
+  padding: 2px 10px !important;
+}
+.button-primary {
+  background-color: #7a3ce9 !important;
+  color: white;
+}
+
 .price {
   font-size: 16px;
   font-weight: 600;
@@ -55,9 +58,71 @@ text {
 .float-right {
   float: right;
 }
+
+/**
+ * font
+ */
+text {
+  color: #202021;
+  font-size: 14px;
+}
+.h1 {
+  display: block;
+  font-size: 22px;
+  font-weight: bold;
+}
+.h2 {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+}
+.h3 {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+}
+.h4 {
+  display: block;
+  font-size: 14px;
+}
+.small {
+  font-size: 12px;
+}
+
+/** text color **/
+.text-white {
+  color: white;
+}
+.text-primary {
+  color: #7a3ce9 !important;
+}
+.text-dark {
+  color: #333;
+}
+.text-secondary {
+  color: #505050;
+  font-size: 32rpx;
+}
+.text-grey {
+  color: #a6a4a9;
+}
+
+/** size **/
+.text-medium {
+  font-size: 14px;
+}
+.text-small {
+  font-size: 12px;
+}
+
+/** font position **/
+.text-center {
+  text-align: center;
+}
 .text-right {
   text-align: right;
 }
+
 
 /** horizontal view **/
 .row {
@@ -79,6 +144,8 @@ text {
   padding: 10px;
   overflow: hidden;
 }
+
+/** commodity **/
 .commodity-section {
   display: flex;
   background: white;
