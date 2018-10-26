@@ -1,0 +1,14 @@
+<import src="../../templates/commodity.wxml" />
+<view>
+  <view class="nav border-primary">
+    <text class="text-primary">全部</text>
+    <text>口红</text>
+    <text>粉底</text>
+    <text>腮红</text>
+  </view>
+  <scroll-view>
+  <template wx:for="{{commodities}}" 
+    is="commodity"
+    data="{{out:10,flex:2, id:item.goods_id, name:item.goods_name, cover:item.image, price:item.goods_min_price}}" />
+  </scroll-view>
+</view>
