@@ -42,6 +42,20 @@ Page({
   submit: function() {
     if(!this.data.address) {
       wx.showToast({mask:true,title:'请选择收货地址',icon:'error'})
+      return
     }
+    let self = this
+    let url = api.buy + '?token=' + app.globalData.token + '&act=submit'
+    wx.request({
+      url: url,
+      method: 'POST',
+      data: self.data.address,
+      success: function(res) {
+        wx.navigateTo({url:'/pages/pay/pay?amount=120.00&order=1'})
+      },
+      fail: function(error) {
+        wx.shotToast({title:'服务器错误'})
+      }
+    })
   }
 })
