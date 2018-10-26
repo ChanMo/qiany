@@ -4,6 +4,7 @@
     "pages/logs/logs",
     "pages/home/home",
     "pages/category/category",
+    "pages/list/list",
     "pages/light/light",
     "pages/article/article",
     "pages/page/page",
