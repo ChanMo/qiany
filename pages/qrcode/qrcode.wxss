@@ -13,7 +13,8 @@ page {
   height: 100vh;
 }
 .qrcode {
-  width: 38vmin;
-  height: 38vmin;
+  width: 36vmin;
+  height: 36vmin;
+  margin-left: 3vmin;
   margin-bottom: 12vh;
 }
