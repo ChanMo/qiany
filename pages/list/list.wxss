@@ -1,0 +1,18 @@
+page {
+  background: white;
+}
+.nav {
+  background: white;
+  margin-bottom: 5px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  border-bottom: 1px solid transparent;
+}
+.nav text {
+  margin-right: 10px;
+}
+scroll-view {
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+

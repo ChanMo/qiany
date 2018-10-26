@@ -4,6 +4,7 @@
     "pages/logs/logs",
     "pages/home/home",
     "pages/category/category",
+    "pages/list/list",
     "pages/light/light",
     "pages/article/article",
     "pages/page/page",
@@ -18,7 +19,8 @@
     "pages/qrcode/qrcode",
     "pages/buy/buy",
     "pages/point/point",
-    "pages/delivery/delivery"
+    "pages/delivery/delivery",
+    "pages/pay/pay"
   ],
   "window":{
     "backgroundTextStyle":"light",

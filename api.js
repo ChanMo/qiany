@@ -1,4 +1,3 @@
-//const domain = "http://192.168.0.109:8000/"
 const domain = "http://wx.lcpxj.com/v1/"
 const api = {
   "login": domain + "user/login",
@@ -12,6 +11,8 @@ const api = {
   "commodity": domain + "goods/detail",
   "page": domain + "content/index",
   "addToCart": domain + "cart/add",
-  "cart": domain + "cart/lists"
+  "cart": domain + "cart/lists",
+  "buy": domain + "order/cart",
+  "qrcode": domain + "user/QrCode"
 }
 module.exports = api

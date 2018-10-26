@@ -9,11 +9,17 @@
     </view>
   </view>
   <view class="delivery">
-    <view class="delivery__item">【收货地址】中国山东省济南市高新区</view>
-    <view class="delivery__item">已签收</view>
-    <view class="delivery__item">派送中</view>
-    <view class="delivery__item">运输中</view>
-    <view class="delivery__item">已揽件</view>
-    <view class="delivery__item">已发货</view>
+    <view class="delivery__item" wx:for="{{list}}">
+      <view style="width:12%;text-align:center;">
+        <view>{{item.date}}</view>
+        <view class="text-grey small">{{item.time}}</view>
+      </view>
+      <view class="middle {{item.active && 'text-primary'}}">O
+        <view class="middle-line" ></view></view>
+      <view>
+        <view>{{item.title}}</view>
+        <view class="text-grey small">{{item.content}}</view>
+      </view>
+    </view>
   </view>
 </scroll-view>
