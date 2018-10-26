@@ -19,7 +19,8 @@
     "pages/qrcode/qrcode",
     "pages/buy/buy",
     "pages/point/point",
-    "pages/delivery/delivery"
+    "pages/delivery/delivery",
+    "pages/pay/pay"
   ],
   "window":{
     "backgroundTextStyle":"light",

@@ -36,7 +36,8 @@
         <text class="commodity__summary">共2件商品 合计<text class="price">￥120</text>(含运费10.00)</text>
       </view>
       <view style="text-align:right">
-        <button size="mini">支付</button>
+        <navigator class="button button-primary"
+          url="/pages/pay/pay?amount=130.00&order=2">支付</navigator>
       </view>
     </view>
   </scroll-view>

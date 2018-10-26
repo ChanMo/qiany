@@ -28,4 +28,9 @@
     <view>订单编号: 12030030301</view>
     <view>创建时间: 2018/09/10</view>
   </view>
+
+  <view style="padding:20px;">
+    <navigator class="button button-block button-primary"
+      url="/pages/pay/pay?amount=140.00&order=3">支付</navigator>
+  </view>
 </scroll-view>
