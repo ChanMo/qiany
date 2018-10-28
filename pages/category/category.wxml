@@ -33,6 +33,7 @@
         class="right__item">
         <image src="{{item.image_path}}" 
           style="border-radius:50%"
+          class="mb5"
           mode="aspectFit" />
         <view><text style="font-size:13px;">{{language == 'zh' ? item.name : item.en}}</text></view>
       </navigator>

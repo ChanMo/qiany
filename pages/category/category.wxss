@@ -41,7 +41,9 @@ page {
 .right__item {
   width: calc(100%/3);
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
+  padding: 5px;
+  box-sizing: border-box;
 }
 .right__item view {
   margin-top: -8px;
