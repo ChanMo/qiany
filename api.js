@@ -13,6 +13,9 @@ const api = {
   "addToCart": domain + "cart/add",
   "cart": domain + "cart/lists",
   "buy": domain + "order/cart",
-  "qrcode": domain + "user/QrCode"
+  "pay": domain + "user.order/pay",
+  "qrcode": domain + "user/QrCode",
+  "orderList": domain + "user.order/lists",
+  "order": domain + "user.order/detail"
 }
 module.exports = api
