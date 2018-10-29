@@ -22,6 +22,9 @@ page {
 .mb10 {
   margin-bottom: 10px;
 }
+.mt20 {
+  margin-top: 20px;
+}
 .border-primary {
   border-color: #7a3ce9 !important;
 }
