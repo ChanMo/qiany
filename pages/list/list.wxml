@@ -1,11 +1,11 @@
 <import src="../../templates/commodity.wxml" />
 <view>
-  <view class="nav border-primary">
-    <text class="text-primary">全部</text>
-    <text>口红</text>
-    <text>粉底</text>
-    <text>腮红</text>
-  </view>
+  <scroll-view class="nav" scroll-x="true">
+    <text data-value="0" bindtap="setActive" class="{{active == 0 && 'text-primary'}}">全部</text>
+    <text wx:for="{{category}}" wx:key="{{index}}" 
+      data-value="{{item.category_id}}" bindtap="setActive"
+      class="{{item.category_id == active && 'text-primary'}}">{{item.name}}</text>
+  </scroll-view>
   <scroll-view>
   <template wx:for="{{commodities}}" 
     is="commodity"
