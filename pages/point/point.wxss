@@ -43,7 +43,3 @@ text {
   padding: 5px 10px;
   margin-bottom: 1px;
 }
-.date {
-  font-size: 14px;
-  color: grey;
-}

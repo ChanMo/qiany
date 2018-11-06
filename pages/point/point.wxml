@@ -1,21 +1,53 @@
 <view class="nav">
-  <text class="nav_active">人群</text>
-  <text>积分来源</text>
-  <text>积分使用</text>
+  <text bindtap="setActive" data-value="people"
+    class="{{active == 'people' && 'nav_active'}}">人群</text>
+  <text bindtap="setActive" data-value="from"
+    class="{{active == 'from' && 'nav_active'}}">积分来源</text>
+  <text bindtap="setActive" data-value="to"
+    class="{{active == 'to' && 'nav_active'}}">积分使用</text>
 </view>
 <view class="container">
   <view class="main">
     <view><text class="point">1200</text></view>
     <view><text>获取积分</text></view>
   </view>
-  <scroll-view class="log-container">
-    <view class="log-item">
-      <view><text>购买了MAY护肤三部曲</text></view>
-      <view><text class="date">2018-09-01</text></view>
+  <scroll-view class="log-container" wx:if="{{active == 'people'}}">
+    <view class="log-item row">
+      <image 
+        src="https://doyou.oss-cn-beijing.aliyuncs.com/images/avatar1.jpg" 
+        style="width:42px;height:42px;border-radius:50%;margin-right:10px" />
+      <view class="h4">ChanMo</view>
     </view>
-    <view class="log-item">
-      <view><text>购买了MAY护肤三部曲</text></view>
-      <view><text class="date">2018-09-01</text></view>
+    <view class="log-item row">
+      <image 
+        src="https://doyou.oss-cn-beijing.aliyuncs.com/images/avatar1.jpg" 
+        style="width:42px;height:42px;border-radius:50%;margin-right:10px" />
+      <view class="h4">ChanMo</view>
+    </view>
+  </scroll-view>
+  <scroll-view class="log-container" wx:if="{{active == 'from'}}">
+    <view class="log-item row row_between">
+      <view>
+        <view class="h4">推广获得</view>
+        <view class="small text-grey">2018/10/12</view>
+      </view>
+      <text class="h2">10</text>
+    </view>
+    <view class="log-item row row_between">
+      <view>
+        <view class="h4">推广获得</view>
+        <view class="small text-grey">2018/10/10</view>
+      </view>
+      <text class="h2">10</text>
+    </view>
+  </scroll-view>
+  <scroll-view class="log-container" wx:if="{{active == 'to'}}">
+    <view class="log-item row row_between">
+      <view>
+        <view>购买了MAY护肤三部曲</view>
+        <view class="small text-grey">2018-09-01</view>
+      </view>
+      <text class="h2">10</text>
     </view>
   </scroll-view>
 </view>
