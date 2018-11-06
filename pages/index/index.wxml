@@ -36,7 +36,7 @@
   </view>
 
   <!-- 推荐商品 -->
-  <view style="margin:10px 0;text-align:center;">
+  <view style="margin:15px 0 5px;text-align:center;">
     <image src="../../images/hotTitle.png" style="width:92px;height:18px;" />
   </view>
   <view style="display:flex;flex-wrap:wrap;padding:0 10px">

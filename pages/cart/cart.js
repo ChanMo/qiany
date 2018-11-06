@@ -8,6 +8,8 @@ Page({
     price: 0
   },
   onLoad: function() {
+  },
+  onShow: function() {
     this._fetchCart()
   },
   /** 结算操作 **/
@@ -19,12 +21,6 @@ Page({
     }
   },
   _fetchCart: function() {
-    /**
-    let data = [
-      {"id":1,"name":"测试","price":120,"image":"https://img.alicdn.com/bao/uploaded/TB1lO6XJpXXXXc_XFXXLhc5_XXX_054423.jpg_160x160.jpg","checked":true,"count":1},
-      {"id":2,"name":"测试","price":120,"image":"https://img.alicdn.com/bao/uploaded/TB1lO6XJpXXXXc_XFXXLhc5_XXX_054423.jpg_160x160.jpg","checked":false,"count":2}
-    ]
-     **/
     let self = this
     let url = api.cart
     wx.request({url,
@@ -46,7 +42,8 @@ Page({
   _makePrice: function() {
     let price = 0
     let checked = this.data.cart.filter(item => item.checked)
-    checked.map(item => price += item.price * item.count)
+    checked.map(item => price += parseFloat(item.total_price))
+    console.log(price)
     this.setData({price:price})
   },
 
@@ -65,10 +62,11 @@ Page({
 
   /** 全选 **/
   _checkAll: function(e) {
-    console.log(e.detail.value)
     let checked = []
-    if(e.detail.value) {
-      checked = this.data.cart.map(item=>item.id)
+    if(e.detail.value.length > 0) {
+      checked = this.data.cart.map(item=>item.goods_sku_id)
+    } else {
+      checked = []
     }
     this._updateCart(checked)
   },

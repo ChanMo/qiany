@@ -4,12 +4,16 @@ page {
 .nav {
   background: white;
   margin-bottom: 5px;
-  padding: 10px 15px;
+  padding: 0 15px;
+  height: 40px;
+  line-height: 40px;
   box-sizing: border-box;
   border-bottom: 1px solid transparent;
+  overflow: scroll;
+  white-space: nowrap;
 }
 .nav text {
-  margin-right: 10px;
+  margin-right: 25px;
 }
 scroll-view {
   padding: 0 10px;

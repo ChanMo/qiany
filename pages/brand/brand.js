@@ -12,6 +12,12 @@ Page({
     this._fetchBrand()
     this._fetchCommodities()
   },
+  onShareAppMessage: function(res) {
+    return {
+      title: '[代购商城] '+this.data.brand.name,
+      path: '/pages/brand/brand?id=' + this.data.id
+    }
+  },
   _fetchBrand: function() {
     let self = this
     let url = api.brand + '?brand_id=' + this.data.id

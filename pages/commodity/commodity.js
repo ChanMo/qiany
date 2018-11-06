@@ -22,7 +22,12 @@ Page({
     animation.translateY(120)
     this.setData({modalAnimation:animation.export()})
   },
-
+  onShareAppMessage: function(res) {
+    return {
+      title: '[代购商城] '+this.data.commodity.detail.goods_name,
+      path: '/pages/commodity/commodity?id=' + this.data.id
+    }
+  },
   // 选择规格
   setSpec: function(e) {
     let value = e.currentTarget.dataset.id

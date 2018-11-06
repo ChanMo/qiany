@@ -26,7 +26,7 @@
               <text class="price" 
                 style="font-size:12px;"
                 >￥</text>{{item.goods_sku.goods_price}}</text>
-            <text> x{{item.total_num}}</text>
+            <text class="float-right">x{{item.total_num}}</text>
           </view>
         </view>
       </view>

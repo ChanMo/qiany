@@ -29,9 +29,9 @@ Page({
   },
   _setOrder: function() {
     let data = [
-      {"name":"待付款","icon":"http://doyou.oss-cn-beijing.aliyuncs.com/icon/nopay.png","param":"unpay"},
-      {"name":"待发货","icon":"http://doyou.oss-cn-beijing.aliyuncs.com/icon/gift.png","param":"undelivery"},
-      {"name":"待收货","icon":"http://doyou.oss-cn-beijing.aliyuncs.com/icon/delivery.png","param":"unreceive"},
+      {"name":"待付款","icon":"http://doyou.oss-cn-beijing.aliyuncs.com/icon/nopay.png","param":"payment"},
+      {"name":"待发货","icon":"http://doyou.oss-cn-beijing.aliyuncs.com/icon/gift.png","param":"delivery"},
+      {"name":"待收货","icon":"http://doyou.oss-cn-beijing.aliyuncs.com/icon/delivery.png","param":"unreceived"},
       {"name":"已收货","icon":"http://doyou.oss-cn-beijing.aliyuncs.com/icon/send.png","param":"finished"},
       {"name":"退款","icon":"http://doyou.oss-cn-beijing.aliyuncs.com/icon/refund.png","param":"refund"}
     ]

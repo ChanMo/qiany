@@ -3,16 +3,16 @@
 <template is="search" />
 <view class="container">
   <!-- 左侧一级分类 -->
-  <view class="left">
+  <scroll-view class="left" scroll-y="true">
     <view wx:for="{{category}}" 
       bindtap="setActive" data-index="{{index}}"
       class="left__item {{active == index && 'left__item_active'}}">
       <image src="{{item.image_path}}" style="width:40px;height:40px;" />
       <view>{{item.name}}</view>
     </view>
-  </view>
+  </scroll-view>
 
-  <view class="right" wx:if="{{active == 0}}">
+  <scroll-view class="right" wx:if="{{active == 0}}">
     <view>
       <view style="display:flex;justify-content:center;margin-bottom:10px;">
         <view bindtap="setLanguage" data-language="zh" style="padding:5px 30px;font-size:12px;border:1px solid #7840ee;{{language == 'zh' && 'background:#7840ee;color:white;'}}">中文</view>
@@ -33,14 +33,16 @@
         class="right__item">
         <image src="{{item.image_path}}" 
           style="border-radius:50%"
+          class="mb5"
           mode="aspectFit" />
         <view><text style="font-size:13px;">{{language == 'zh' ? item.name : item.en}}</text></view>
       </navigator>
     </view>
-  </view>
+  </scroll-view>
 
   <!-- 二级分类 -->
   <view wx:else class="right" >
+    <view class="h3 text-center text-primary">彩妆</view>
     <view class="right__container">
       <navigator wx:for="{{category[active].child}}"
         hover-class="none"
