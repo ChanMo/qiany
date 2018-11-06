@@ -7,13 +7,11 @@ page {
 }
 .left {
   width: 28%;
-  border-top: 1px solid #7a3ce9;
+  height: calc(100vh - 54px);
 }
 .left__item {
   text-align: center;
   padding: 10px 0;
-  border-bottom: 1px solid #7a3ce9;
-  border-right: 1px solid #7a3ce9;
 }
 .left__item image {
   width: 25px;
