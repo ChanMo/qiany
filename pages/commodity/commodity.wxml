@@ -1,3 +1,4 @@
+<import src="../../templates/commodity" />
 <view>
   <scroll-view style="margin-bottom:50px;">
     <!-- 轮播图 -->
@@ -61,6 +62,24 @@
         nodes="{{commodity.detail.content}}"></rich-text>
     </view>
 
+    <!-- 相关推荐 -->
+    <view class="section">
+      <view class="h4 mt5 mb5 text-primary text-center">- 相关推荐 -</view>
+      <swiper 
+        style="height:200px"
+        indicator-dots="true" 
+        indicator-active-color="#7a3ce9">
+        <block wx:for="{{[1,2,3]}}" wx:key="{{index}}">
+          <swiper-item>
+            <template 
+              wx:for="{{[1,2,3]}}" wx:key="{{index2}}"
+              is="commodity" 
+              data="{{out:15,flex:3,id:id,name:commodity.detail.goods_name,cover:commodity.detail.image,price:commodity.detail.spec[0].goods_price}}" />
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+
   </scroll-view>
   <view class="action">
     <navigator
@@ -76,11 +95,11 @@
     <view
       bindtap="addToCart"
       class="button" 
-      style="background-color:#fe6487">加入购物车</view>
+      style="background-color:#fe6487;border-radius:0">加入购物车</view>
     <view
       bindtap="openModal"
       class="button" 
-      style="background-color:#02baf2">立即购买</view>
+      style="background-color:#02baf2;border-radius:0">立即购买</view>
   </view>
 </view>
 
