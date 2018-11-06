@@ -10,7 +10,12 @@ Page({
     link: [],
     hot: []
   },
-
+  onShareAppMessage: function(res) {
+    return {
+      title: '代购商城',
+      path: '/pages/index/index'
+    }
+  },
   // 获取轮播图数据
   _fetchBanner: function() {
     let self = this
