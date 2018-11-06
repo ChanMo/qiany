@@ -22,6 +22,12 @@ page {
 .mb10 {
   margin-bottom: 10px;
 }
+.mt5 {
+  margin-top: 5px;
+}
+.mt10 {
+  margin-top: 10px;
+}
 .mt20 {
   margin-top: 20px;
 }
@@ -139,7 +145,7 @@ text {
   align-items: center;
 }
 .row_between {
-  justify-content: space-bewteen;
+  justify-content: space-between;
 }
 
 .flex_bottom {
