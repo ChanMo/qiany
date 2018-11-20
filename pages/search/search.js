@@ -7,6 +7,6 @@ Page({
   // set search value
   setValue: function(e) {
     let value = e.detail.value
-    wx.navigateTo({url: '/pages/commodityList/commodityList?search='+value})
+    wx.navigateTo({url: '/pages/list/list?search='+value})
   }
 })

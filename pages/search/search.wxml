@@ -8,7 +8,7 @@
       bindconfirm='setValue' />
   </view>
   <view>
-    <navigator class="label" url="/pages/commodityList/commodityList">口红</navigator>
-    <navigator class="label" url="/pages/commodityList/commodityList">面膜</navigator>
+    <navigator class="label" url="/pages/list/list?search=口红">口红</navigator>
+    <navigator class="label" url="/pages/list/list?search=面膜">面膜</navigator>
   </view>
 </view>
