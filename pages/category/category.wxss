@@ -6,8 +6,9 @@ page {
   display: flex;
 }
 .left {
-  width: 28%;
+  width: 30%;
   height: calc(100vh - 54px);
+  background: rgba(0,0,0,0.06);
 }
 .left__item {
   text-align: center;

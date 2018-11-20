@@ -7,7 +7,7 @@
     <view wx:for="{{category}}" 
       bindtap="setActive" data-index="{{index}}"
       class="left__item {{active == index && 'left__item_active'}}">
-      <image src="{{item.image_path}}" style="width:40px;height:40px;" />
+      <!--image src="{{item.image_path}}" style="width:40px;height:40px;"/-->
       <view>{{item.name}}</view>
     </view>
   </scroll-view>
@@ -46,7 +46,7 @@
     <view class="right__container">
       <navigator wx:for="{{category[active].child}}"
         hover-class="none"
-        url="/pages/commodityList/commodityList?category={{item.category_id}}" 
+        url="/pages/list/list?category={{item.category_id}}" 
         class="right__item">
         <image src="{{item.image_path}}" mode="aspectFit" />
         <view><text style="font-size:13px;">{{item.name}}</text></view>
