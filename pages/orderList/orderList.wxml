@@ -4,8 +4,8 @@
       class="{{active == 'payment' && 'active'}}">待付款</view>
     <view data-value="delivery" bindtap="setActive" 
       class="{{active == 'delivery' && 'active'}}">待发货</view>
-    <view data-value="unreceived" bindtap="setActive" 
-      class="{{active == 'unreceived' && 'active'}}">待收货</view>
+    <view data-value="received" bindtap="setActive" 
+      class="{{active == 'received' && 'active'}}">待收货</view>
     <view data-value="finished" bindtap="setActive" 
       class="{{active == 'finished' && 'active'}}">已收货</view>
     <view data-value="refund" bindtap="setActive"
@@ -41,9 +41,34 @@
         <text class="commodity__summary">共2件商品 合计<text class="price">￥{{item.total_price}}</text>(含运费10.00)</text>
       </view>
       <view style="text-align:right">
+
+        <!-- 取消订单 -->
+        <navigator wx:if="{{item.pay_status.value == 10}}"
+          class="button button-grey mr10"
+          url="/pages/cancel/cancel?order={{item.order_id}}"
+          >取消订单</navigator>
+
+        <!-- 支付 -->
         <navigator wx:if="{{item.pay_status.value == 10}}" 
           class="button button-primary"
-          url="/pages/pay/pay?amount={{item.total_price}}&order={{item.order_id}}">支付</navigator>
+          url="/pages/pay/pay?amount={{item.total_price}}&order={{item.order_id}}">去支付</navigator>
+
+        <!-- 退款订单 -->
+        <navigator wx:if="{{item.pay_status.value == 20 && item.delivery_status.value == 10}}" 
+          class="button button-primary"
+          url="/pages/refund/refund?order={{item.order_id}}">退款</navigator>
+
+
+        <!-- 查看物流 -->
+        <navigator wx:if="{{item.delivery_status.value == 20}}" 
+          class="button button-grey mr10"
+          url="/pages/delivery/delivery?order={{item.order_id}}">查看物流</navigator>
+
+        <!-- 确认收货 -->
+        <navigator wx:if="{{item.delivery_status.value == 20}}" 
+          class="button button-primary"
+          url="/pages/confirm/confirm?order={{item.order_id}}">确认收货</navigator>
+
       </view>
     </view>
     </block>
