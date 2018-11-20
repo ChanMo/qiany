@@ -15,12 +15,13 @@
           src="{{item.image}}" />
         <view class="commodity__main">
           <view class="row row_between" style="align-items:flex-start">
-            <view style="flex-grow:1">
+            <view style="flex-grow:1;margin-bottom:5px;">
               <navigator 
                 url="/pages/commodity/commodity?id={{item.goods_id}}">
                 <text class="commodity__title">{{item.goods_name}}</text>
               </navigator>
-              <view style="margin-bottom:5px;" 
+              <view
+                wx:if="{{item.goods_sku.goods_attr}}"
                 class="commodity__params">
                 {{item.goods_sku.goods_attr}}</view>
             </view>
