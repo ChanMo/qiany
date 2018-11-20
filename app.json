@@ -20,7 +20,10 @@
     "pages/buy/buy",
     "pages/point/point",
     "pages/delivery/delivery",
-    "pages/pay/pay"
+    "pages/pay/pay",
+    "pages/cancel/cancel",
+    "pages/confirm/confirm",
+    "pages/refund/refund"
   ],
   "window":{
     "backgroundTextStyle":"light",
