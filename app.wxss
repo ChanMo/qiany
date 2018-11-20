@@ -16,6 +16,14 @@ page {
   font-size: 14px;
 }
 
+.mv10 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.mv20 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 .mb5 {
   margin-bottom: 5px;
 }
@@ -30,6 +38,9 @@ page {
 }
 .mt20 {
   margin-top: 20px;
+}
+.mr20 {
+  margin-right: 20px;
 }
 .border-primary {
   border-color: #7a3ce9 !important;
@@ -63,6 +74,10 @@ page {
 .button-primary {
   background-color: #7a3ce9 !important;
   color: white;
+}
+.button-grey {
+  background-color: lightgrey;
+  color: #3a3a3a;
 }
 
 .price {
@@ -173,4 +188,24 @@ text {
 .commodity-section__right {
   flex-grow: 1;
   padding-left: 10px;
+}
+
+/** counter **/
+.counter {
+  width: 82px;
+  display: flex;
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+  line-height: 20px;
+  height: 20px;
+}
+.counter__action {
+  width: 20px;
+  text-align: center;
+}
+.counter__value {
+  width: 40px;
+  text-align: center;
+  border-left: 1px solid lightgrey;
+  border-right: 1px solid lightgrey;
 }
