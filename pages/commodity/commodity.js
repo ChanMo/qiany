@@ -6,28 +6,26 @@ Page({
     modalVisible: false,
     modalAnimation: null,
     commodity: {},
+    count: 1,
+    content: null, // 图文详情
     spec: null, // 规则obj数据
     spec_ids: null // 子规则ids
   },
+
   onLoad: function(option) {
     let id = option['id']
     this.setData({id:id})
     this._fetchCommodity()
   },
-  onShow: function() {
-    var animation = wx.createAnimation({
-      duration: 1000,
-      timingFunction: 'ease'
-    })
-    animation.translateY(120)
-    this.setData({modalAnimation:animation.export()})
-  },
+
+  // 分享
   onShareAppMessage: function(res) {
     return {
       title: '[代购商城] '+this.data.commodity.detail.goods_name,
       path: '/pages/commodity/commodity?id=' + this.data.id
     }
   },
+
   // 选择规格
   setSpec: function(e) {
     let value = e.currentTarget.dataset.id
@@ -56,7 +54,6 @@ Page({
     let data = {
       goods_id: this.data.id,
       goods_num: 1,
-      //goods_sku_id: this.data.spec.goods_spec_id,
       goods_sku_id: this.data.spec.spec_sku_id,
       token: app.globalData.token
     }
@@ -74,7 +71,6 @@ Page({
         wx.showToast({'title':'服务器错误'})
       }
     })
-    //this.closeModal()
   },
   // 获取商品信息
   _fetchCommodity: function() {
@@ -85,20 +81,30 @@ Page({
         self.setData({
           commodity: res.data.data,
           spec: res.data.data.detail.spec[0],
-          spec_ids: res.data.data.detail.spec[0].spec_sku_id.split('_')
+          spec_ids: res.data.data.detail.spec[0].spec_sku_id.split('_'),
+          content: res.data.data.detail.content.replace(/<img /, '<img style="width:100%" ')
         })
       }
     }})
   },
   // 关闭modal
-  closeModal: function() {
+  onModalHide: function() {
     this.setData({modalVisible:false})
   },
   // 开启modal
-  openModal: function() {
+  onModalShow: function() {
     this.setData({modalVisible:true})
   },
+  onDecrease: function() {
+    if(this.data.count == 1) {
+      return
+    }
+    this.setData({count:this.data.count-1})
+  },
+  onIncrease: function() {
+    this.setData({count:this.data.count+1})
+  },
   buy: function() {
-    wx.navigateTo({url:'/pages/buy/buy'})
+    wx.navigateTo({url:'/pages/buy/buy?commodity='+this.data.id+'&count='+this.data.count+'&sku='+this.data.spec.spec_sku_id})
   }
 })
