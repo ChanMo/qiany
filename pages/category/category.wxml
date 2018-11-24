@@ -42,7 +42,7 @@
 
   <!-- 二级分类 -->
   <view wx:else class="right" >
-    <view class="h3 text-center text-primary">彩妆</view>
+    <view class="h3 text-center text-primary">{{category[active].name}}</view>
     <view class="right__container">
       <navigator wx:for="{{category[active].child}}"
         hover-class="none"
