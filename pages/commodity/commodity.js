@@ -50,6 +50,8 @@ Page({
 
   // 加入购物车
   addToCart: function() {
+    wx.showLoading({title:'处理中', mask:true})
+    const self = this
     const url = api.addToCart
     let data = {
       goods_id: this.data.id,
@@ -62,6 +64,7 @@ Page({
       data: data,
       success: function(res) {
         if(res.data.code > 0) {
+          self.setData({modalVisible: false})
           wx.showToast({'title':'加入成功'})
         } else {
           wx.showToast({'title':res.data.msg})
