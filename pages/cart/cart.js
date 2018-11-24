@@ -15,6 +15,8 @@ Page({
 
   /** 结算操作 **/
   submit: function() {
+    wx.navigateTo({url:'/pages/buy/buy'})
+    return
     if(this.data.checked.length > 0) {
       wx.navigateTo({url:'/pages/buy/buy'})
     } else {
