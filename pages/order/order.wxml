@@ -1,13 +1,16 @@
 <scroll-view>
+
+  <!-- 收货地址 -->
   <view class="address-container">
     <view>
       <text>{{order.address.name}}</text>
-      <text style="color:grey">{{order.address.phone}}</text>
+      <text class="text-grey">  {{order.address.phone}}</text>
     </view>
     <view>
-      <text>{{order.address.province + order.address.city + order.address.detail}}</text>
+      <text class="text-grey">{{order.address.province + order.address.city + order.address.detail}}</text>
     </view>
   </view>
+
   <view class="commodity-container">
     <navigator wx:for="{{order.goods}}"
       style="display:flex;padding:10px;"
