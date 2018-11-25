@@ -4,41 +4,47 @@ const api = require('./api')
 App({
   globalData: {
     userInfo: null,
+    p: 0, // 推广人ID
+    uid: 0, // 用户ID
     token: null
   },
-  onLaunch: function (options) {
-    let self = this
-    let p = 0
-    if(options.query.p) {
-      p = options.query.p
-    }
-    const token = wx.getStorageSync('token')
-    if(token) {
-      // 如果已经登录
-      self.globalData.token = token
-    } else {
-      // 登录
-      wx.login({
-        success: res => {
-          console.log(res.code)
-          // 发送 res.code 到后台换取 openId, sessionKey, unionId
-          let url = api.login + '?code=' + res.code + '&p=' + p
-          wx.request({url:url, success:function(res){
-            if(res.data.code > 0) {
-              self.globalData.token = res.data.data.token
-              self.globalData.uid = res.data.data.user_id
-              wx.setStorageSync('token', res.data.data.token)
-            } else {
-              wx.showToast({title:'登录失败'})
-            }
-            //let token = res.data.token
-            //wx.setStorageSync('token', token)
-          }})
-        }
-      })
-    }
 
-    // 获取用户信息
+  /**
+   * 启动
+   */
+  onLaunch: function (options) {
+    if(options.query.p) {
+      this.globalData.p = options.query.p
+    }
+    this._login()
+  },
+
+  /**
+   * 登录
+   */
+  _login: function() {
+    const self = this
+    wx.login({
+      success: res => {
+        let url = api.login + '?code=' + res.code + '&p=' + self.globalData.p
+        wx.request({url:url, success:function(res){
+          if(res.data.code > 0) {
+            self.globalData.token = res.data.data.token
+            self.globalData.uid = res.data.data.user_id
+            //wx.setStorageSync('token', res.data.data.token)
+            self._getUserInfo()
+          } else {
+            wx.showToast({title:'登录失败'})
+          }
+        }})
+      }
+    })
+  },
+
+  /**
+   * 更新用户信息
+   */
+  _getUserInfo: function() {
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
@@ -59,5 +65,6 @@ App({
         }
       }
     })
+
   }
 })
