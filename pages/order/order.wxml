@@ -11,8 +11,10 @@
     </view>
   </view>
 
+  <!-- 商品列表 -->
   <view class="commodity-container">
     <navigator wx:for="{{order.goods}}"
+      wx:key="{{index}}"
       style="display:flex;padding:10px;"
       url="/pages/commodity/commodity?id={{item.goods_id}}">
       <image 
@@ -26,6 +28,8 @@
       </view>
     </navigator>
   </view>
+
+  <!-- 订单其他信息 -->
   <view class="section">
     <view>运费: {{order.express_price}}</view>
     <view>总金额: {{order.total_price}}</view>
@@ -34,6 +38,7 @@
     <view>创建时间: {{order.create_time}}</view>
   </view>
 
+  <!-- 订单操作 -->
   <view style="padding:20px;">
     <navigator wx:if="{{order.pay_status.value == 10}}" 
       class="button button-block button-primary mb20"
