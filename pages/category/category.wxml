@@ -4,7 +4,7 @@
 <view class="container">
   <!-- 左侧一级分类 -->
   <scroll-view class="left" scroll-y="true">
-    <view wx:for="{{category}}" 
+    <view wx:for="{{category}}"
       bindtap="setActive" data-index="{{index}}"
       class="left__item {{active == index && 'left__item_active'}}">
       <!--image src="{{item.image_path}}" style="width:40px;height:40px;"/-->
@@ -21,13 +21,16 @@
 
       <!-- 字母筛选 -->
       <view>
-        <text wx:for="{{alphabet}}" style="background:#e7e7e7;width:30px;height:30px;line-height:30px;text-align:center;border-radius:2px;margin:0 5px 5px 0;font-size:14px;display:inline-block;{{activeAlphabet == item && 'background:#7b39ea;color:white;'}}" bindtap="choiceAlphabet" data-value="{{item}}">{{item}}</text>
+        <text wx:for="{{alphabet}}" 
+          wx:key="{{index}}"
+          style="background:#e7e7e7;width:30px;height:30px;line-height:30px;text-align:center;border-radius:2px;margin:0 5px 5px 0;font-size:14px;display:inline-block;{{activeAlphabet == item && 'background:#7b39ea;color:white;'}}" bindtap="choiceAlphabet" data-value="{{item}}">{{item}}</text>
       </view>
     </view>
 
     <!-- 品牌列表 -->
     <view class="right__container" style="margin-top:20px">
       <navigator wx:for="{{activeBrands}}"
+        wx:key="{{index}}"
         hover-class="none"
         url="/pages/brand/brand?id={{item.brand_id}}" 
         class="right__item">
@@ -45,6 +48,7 @@
     <view class="h3 text-center text-primary">{{category[active].name}}</view>
     <view class="right__container">
       <navigator wx:for="{{category[active].child}}"
+        wx:key="{{index}}"
         hover-class="none"
         url="/pages/list/list?category={{item.category_id}}" 
         class="right__item">
