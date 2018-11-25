@@ -108,6 +108,7 @@ Page({
     this.setData({count:this.data.count+1})
   },
   buy: function() {
+    this.setData({modalVisible:false})
     wx.navigateTo({url:'/pages/buy/buy?commodity='+this.data.id+'&count='+this.data.count+'&sku='+this.data.spec.spec_sku_id})
   }
 })

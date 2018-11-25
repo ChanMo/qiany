@@ -34,6 +34,7 @@
         <view class="option__header">{{item.group_name}}</view>
         <view class="option__main">
           <block wx:for="{{item.spec_items}}"
+            wx:key="{{index2}}"
             wx:for-item="item2" 
             wx:for-index="index2">
             <text wx:if="{{spec_ids[index] == item2.item_id}}"
@@ -127,6 +128,7 @@
         <view class="option__header">{{item.group_name}}</view>
         <view class="option__main">
           <block wx:for="{{item.spec_items}}" 
+            wx:key="{{index2}}"
             wx:for-item="item2" 
             wx:for-index="index2">
             <text wx:if="{{spec_ids[index] == item2.item_id}}"
