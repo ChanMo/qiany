@@ -1,16 +1,25 @@
 <import src="../../templates/commodity.wxml" />
+
+<!-- 品牌banner图 -->
 <image src="{{brand.banner_path}}" style="width:100%;height:30vw" />
+
+<!-- 品牌简介 -->
 <view style="padding:10px 20px;">
   <view style="font-size:14px;">品牌简介:</view>
   <text style="font-size:12px;color:grey;">{{brand.content}}</text>
 </view>
+
+<!-- 排序 -->
 <view class="nav">
   <text class="nav_active">综合</text>
   <text>价格</text>
   <text>销量</text>
 </view>
+
+<!-- 商品列表 -->
 <scroll-view>
   <template wx:for="{{commodities}}" 
+    wx:key="{{index}}"
     is="commodity"
     data="{{out:10,flex:2, id:item.goods_id, name:item.goods_name, cover:item.image, price:item.spec[0].goods_price}}" />
 </scroll-view>
