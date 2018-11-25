@@ -67,7 +67,6 @@ Page({
     }})
   },
   submit: function() {
-    wx.showLoading({title:'处理中',mask:true})
 
     // 如果未选择收货地址
     if(!this.data.address) {
@@ -77,6 +76,8 @@ Page({
       })
       return
     }
+
+    wx.showLoading({title:'处理中',mask:true})
 
     // 发送数据
     let self = this
