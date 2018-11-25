@@ -4,20 +4,27 @@ const app = getApp()
 Page({
   data: {
     user: null,
-    link: [],
-    order: []
+    link: [], // 功能链接
+    order: [], // 订单链接
   },
   onLoad: function() {
     this.setData({user:app.globalData.userInfo})
     this._setOrder()
     this._fetchLink()
   },
+
+  /**
+   * 获取用户信息
+   */
   onGotUserInfo: function(res) {
     let userInfo = res.detail.userInfo
-    console.log(userInfo)
     app.globalData.userInfo = userInfo
     this.setData({user:userInfo})
   },
+
+  /**
+   * 设置功能列表
+   */
   _fetchLink: function() {
     let data = [
       {"name":"我的二维码","icon":"http://doyou.oss-cn-beijing.aliyuncs.com/icon/qrcode.png","path":"/pages/qrcode/qrcode"},
@@ -27,6 +34,10 @@ Page({
     ]
     this.setData({link:data})
   },
+
+  /**
+   * 设置订单链接
+   */
   _setOrder: function() {
     let data = [
       {"name":"待付款","icon":"http://doyou.oss-cn-beijing.aliyuncs.com/icon/nopay.png","param":"payment"},
@@ -37,6 +48,10 @@ Page({
     ]
     this.setData({order:data})
   },
+
+  /**
+   * 更新用户头像等信息
+   */
   getUserInfo: function(e) {
     if(!e.detail.userInfo) {
       return

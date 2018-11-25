@@ -9,6 +9,8 @@
 
 
 <scroll-view class="container">
+
+  <!-- 头像昵称 -->
   <view class="header" wx:if="{{user}}">
     <image src="{{user.avatarUrl}}" class="avatar" />
     <text class="text-primary">{{user.nickName}}</text>
@@ -16,6 +18,8 @@
   <view class="header" wx:else>
     <image src="http://doyou.oss-cn-beijing.aliyuncs.com/images/avatar1.jpg" class="avatar" />
   </view>
+
+  <!-- 订单 -->
   <view>
     <view class="order-header">
       <text class="text-primary">我的订单</text>
@@ -24,7 +28,7 @@
         url="/pages/orderList/orderList">查看全部></navigator>
     </view>
     <view class="grid">
-      <block wx:for="{{order}}">
+      <block wx:for="{{order}}" wx:key="{{index}}">
         <navigator 
           hover-class="none"
           class="grid-item" 
@@ -38,6 +42,8 @@
       </block>
     </view>
   </view>
+
+  <!-- 最新物流 -->
   <view class="delivery">
     <view style="font-size:14px;color:#7a3ce9;margin-bottom:2px">最新物流</view>
     <navigator 
@@ -52,7 +58,7 @@
     </navigator>
   </view>
   <view class="list">
-    <block wx:for="{{link}}">
+    <block wx:for="{{link}}" wx:key="{{index}}">
       <navigator 
         hover-class="none"
         class="list-item" 
