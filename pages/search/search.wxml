@@ -8,7 +8,11 @@
       bindconfirm='setValue' />
   </view>
   <view>
-    <navigator class="label" url="/pages/list/list?search=口红">口红</navigator>
-    <navigator class="label" url="/pages/list/list?search=面膜">面膜</navigator>
+    <navigator
+      wx:for="{{keywords}}"
+      wx:key="{{index}}"
+      class="label" 
+      url="/pages/list/list?search={{item}}"
+      >{{item}}</navigator>
   </view>
 </view>
