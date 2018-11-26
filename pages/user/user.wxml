@@ -44,7 +44,7 @@
   </view>
 
   <!-- 最新物流 -->
-  <view class="delivery">
+  <!--view class="delivery">
     <view style="font-size:14px;color:#7a3ce9;margin-bottom:2px">最新物流</view>
     <navigator 
       hover-class="none"
@@ -56,7 +56,10 @@
         <view class="text-grey" style="font-size:12px;">【上海市】哈哈区已收件</view>
       </view>
     </navigator>
-  </view>
+  </view-->
+
+
+  <!-- 菜单 -->
   <view class="list">
     <block wx:for="{{link}}" wx:key="{{index}}">
       <navigator 
