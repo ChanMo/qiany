@@ -1,3 +1,4 @@
+<!-- 标签页 -->
 <view class="nav">
   <text bindtap="setActive" data-value="people"
     class="{{active == 'people' && 'nav_active'}}">人群</text>
@@ -6,48 +7,64 @@
   <text bindtap="setActive" data-value="to"
     class="{{active == 'to' && 'nav_active'}}">积分使用</text>
 </view>
+
 <view class="container">
+
+  <!-- 积分 -->
   <view class="main">
-    <view><text class="point">1200</text></view>
+    <view><text class="point">{{point}}</text></view>
     <view><text>获取积分</text></view>
   </view>
+
+  <!-- 团队 -->
   <scroll-view class="log-container" wx:if="{{active == 'people'}}">
-    <view class="log-item row">
+    <view class="log-item row"
+      wx:if="{{team.length > 0}}"
+      wx:for="{{team}}"
+      wx:key="{{index}}">
       <image 
-        src="https://doyou.oss-cn-beijing.aliyuncs.com/images/avatar1.jpg" 
+        src="{{item.avatarUrl}}" 
         style="width:42px;height:42px;border-radius:50%;margin-right:10px" />
-      <view class="h4">ChanMo</view>
+      <view class="h4">{{item.nickName}}</view>
     </view>
-    <view class="log-item row">
-      <image 
-        src="https://doyou.oss-cn-beijing.aliyuncs.com/images/avatar1.jpg" 
-        style="width:42px;height:42px;border-radius:50%;margin-right:10px" />
-      <view class="h4">ChanMo</view>
-    </view>
+    <view 
+      wx:if="{{team.length == 0}}"
+      class="mt20 text-center">这里什么都没有</view>
   </scroll-view>
+
+  <!-- 收入记录 -->
   <scroll-view class="log-container" wx:if="{{active == 'from'}}">
-    <view class="log-item row row_between">
+    <view 
+      class="log-item row row_between"
+      wx:if="{{log}}"
+      wx:for="{{log}}"
+      wx:key="{{index}}">
       <view>
-        <view class="h4">推广获得</view>
+        <view class="h4">{{item.desc}}</view>
         <view class="small text-grey">2018/10/12</view>
       </view>
-      <text class="h2">10</text>
+      <text class="h2">{{item.money}}</text>
     </view>
-    <view class="log-item row row_between">
-      <view>
-        <view class="h4">推广获得</view>
-        <view class="small text-grey">2018/10/10</view>
-      </view>
-      <text class="h2">10</text>
-    </view>
+    <view 
+      wx:if="{{team.length == 0}}"
+      class="mt20 text-center">这里什么都没有</view>
   </scroll-view>
+
+  <!-- 支出记录 -->
   <scroll-view class="log-container" wx:if="{{active == 'to'}}">
-    <view class="log-item row row_between">
+    <view 
+      class="log-item row row_between"
+      wx:if="{{log}}"
+      wx:for="{{log}}"
+      wx:key="{{index}}">
       <view>
-        <view>购买了MAY护肤三部曲</view>
-        <view class="small text-grey">2018-09-01</view>
+        <view class="h4">{{item.desc}}</view>
+        <view class="small text-grey">2018/10/12</view>
       </view>
-      <text class="h2">10</text>
+      <text class="h2">{{item.money}}</text>
     </view>
+    <view 
+      wx:if="{{team.length == 0}}"
+      class="mt20 text-center">这里什么都没有</view>
   </scroll-view>
 </view>
