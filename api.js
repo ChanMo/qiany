@@ -23,5 +23,6 @@ const api = {
   "refund": domain + "user.order/refund",
   "confirm": domain + "user.order/receipt",
   "delivery": domain + "user.order/express",
+  "search": domain + "goods/top_search"
 }
 module.exports = api
