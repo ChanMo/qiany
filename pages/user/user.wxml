@@ -13,7 +13,10 @@
   <!-- 头像昵称 -->
   <view class="header" wx:if="{{user}}">
     <image src="{{user.avatarUrl}}" class="avatar" />
-    <text class="text-primary">{{user.nickName}}</text>
+    <view>
+      <view class="text-primary">{{user.nickName}}</view>
+      <view class="text-grey small">积分:0</view>
+    </view>
   </view>
   <view class="header" wx:else>
     <image src="http://doyou.oss-cn-beijing.aliyuncs.com/images/avatar1.jpg" class="avatar" />
