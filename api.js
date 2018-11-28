@@ -1,4 +1,4 @@
-const domain = "https://wx.lcpxj.com/v1/"
+const domain = "https://api.uaiworld.com/index.php/v1/"
 const api = {
   "login": domain + "user/login",
   "sync": domain + "user/userInfo",
