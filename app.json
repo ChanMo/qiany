@@ -22,7 +22,9 @@
     "pages/pay/pay",
     "pages/cancel/cancel",
     "pages/confirm/confirm",
-    "pages/refund/refund"
+    "pages/refund/refund",
+    "pages/addresses/addresses",
+    "pages/address/address"
   ],
   "window":{
     "backgroundTextStyle":"light",
