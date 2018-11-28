@@ -209,3 +209,11 @@ text {
   border-left: 1px solid lightgrey;
   border-right: 1px solid lightgrey;
 }
+
+
+.input {
+  border: 1px solid lightgrey;
+  padding: 5px 10px;
+  flex-grow: 1;
+  display: block;
+}
