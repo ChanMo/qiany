@@ -1,0 +1,25 @@
+<scroll-view>
+  <view 
+    wx:for="{{data}}" 
+    wx:key="{{index}}" 
+    class="item">
+    <view>
+      <view style="margin-bottom:2px;">
+        <text class="name">{{item.name}}</text>
+        <text>{{item.mobile}}</text>
+      </view>
+      <view>
+        <text wx:if="{{item.default}}" class="default">[默认]</text>
+        <text class="small text-grey">{{item.region}}{{item.street}}</text>
+      </view>
+    </view>
+    <navigator url="/pages/address/address?id={{item.id}}"
+      class="edit">编辑</navigator>
+  </view>
+</scroll-view>
+
+<view class="action">
+  <navigator url="/pages/address/address"
+    class="button button-block button-primary"
+    style="padding:5px !important;border-radius: 30px;margin:20px 30px;box-shadow:1px 2px 3px lightgrey;">添加收货地址</navigator>
+</view>
