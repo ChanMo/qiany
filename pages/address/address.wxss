@@ -1,0 +1,32 @@
+page {
+  background: white;
+}
+form {
+  display: block;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.input-label {
+  width: 20%;
+}
+
+picker {
+  border: 1px solid lightgrey;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  text-align: center;
+  flex-grow: 1;
+}
+picker view {
+  color: grey;
+}
+textarea {
+  width: 100%;
+  flex-grow: 1
+}

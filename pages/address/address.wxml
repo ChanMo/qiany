@@ -1,0 +1,68 @@
+<scroll-view>
+  <form bindsubmit="onSubmit">
+
+    <view class="input-group">
+      <view class="input-label">收件人</view>
+      <input 
+        class="input" 
+        name="name" 
+        placeholder="请输入姓名" />
+    </view>
+
+    <view class="input-group">
+      <view class="input-label">联系电话</view>
+      <input 
+        class="input"
+        name="mobile" 
+        placeholder="请输入联系电话" />
+    </view>
+
+    <view class="input-group" style="margin-bottom:5px !important;">
+      <view class="input-label">收件地址</view>
+      <picker 
+        name="country"
+        value="{{countries[index].code}}"
+        range="{{countries}}" 
+        bindchange="onChangeCountry" 
+        range-key="name">
+        <view>{{countries[index].name}}</view>
+      </picker>
+    </view>
+    <view class="input-group">
+      <view class="input-label"></view>
+      <view style="flex-grow:1;">
+        <picker 
+          wx:if="{{index == 0}}"
+          mode="region" 
+          name="region"
+          value="{{region}}"
+          class="mb5">
+          <view>{{region[0]}} {{region[1]}} {{region[2]}}</view>
+        </picker>
+        <textarea 
+          style="width:auto;"
+          class="input"
+          name="street" 
+          placeholder="请输入详细街道信息" />
+      </view>
+    </view>
+
+    <view class="input-group">
+      <view class="input-label">设为默认</view>
+      <checkbox-group name="default">
+        <checkbox value="{{true}}" />
+      </checkbox-group>
+    </view>
+
+    <view style="margin-top:50px">
+      <button 
+        form-type="submit"
+        class="button button-block button-primary button-small mb20"
+        style="border-radius:5px;">保存</button>
+      <view 
+        wx:if="{{id}}" 
+        bindtap="onDelete" 
+        class="text-grey text-center">删除</view>
+    </view>
+  </form>
+</scroll-view>
