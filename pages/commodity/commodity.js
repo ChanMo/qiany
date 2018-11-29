@@ -81,11 +81,14 @@ Page({
     let url = api.commodity + '?goods_id=' + this.data.id
     wx.request({url, success:function(res){
       if(res.data.code > 0) {
+        let content = res.data.data.detail.content.replace(new RegExp('<img ', 'g'), '<img style="width:100%;height:100%;" ')
+        content = content.replace(new RegExp('style=""', 'g'), '')
         self.setData({
           commodity: res.data.data,
           spec: res.data.data.detail.spec[0],
           spec_ids: res.data.data.detail.spec[0].spec_sku_id.split('_'),
-          content: res.data.data.detail.content.replace(/<img /, '<img style="width:100%" ')
+          content: content
+          //content: res.data.data.detail.content.replace(/<img /, '<img style="width:100%" ')
         })
       }
     }})
