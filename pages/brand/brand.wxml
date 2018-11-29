@@ -10,10 +10,20 @@
 </view>
 
 <!-- 排序 -->
+
 <view class="nav">
-  <text class="nav_active">综合</text>
-  <text>价格</text>
-  <text>销量</text>
+  <text 
+    data-value="all" bindtap="setSort"
+    class="{{sort == 'all' ? 'nav_active' : null}}">综合</text>
+  <text wx:if="{{asc}}"
+    data-value="price" data-asc="true" bindtap="setSort"
+    class="{{sort == 'price' ? 'nav_active' : null}}">价格^</text>
+  <text wx:else
+    data-value="price" data-asc="false" bindtap="setSort"
+    class="{{sort == 'price' ? 'nav_active' : null}}">价格v</text>
+  <text
+    data-value="sales" bindtap="setSort"
+    class="{{sort == 'sales' ? 'nav_active' : null}}">销量</text>
 </view>
 
 <!-- 商品列表 -->
