@@ -1,0 +1,6 @@
+<scroll-view class="container">
+  <rich-text 
+    nodes="{{content}}" 
+    style="margin-bottom:15px;display:block;">
+  </rich-text>
+</scroll-view>

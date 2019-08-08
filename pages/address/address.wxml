@@ -6,21 +6,21 @@
       <input 
         class="input" 
         name="name" 
-        placeholder="请输入姓名" />
+        placeholder="请输入姓名" value='{{data.name}}' />
     </view>
 
     <view class="input-group">
       <view class="input-label">联系电话</view>
       <input 
         class="input"
-        name="mobile" 
-        placeholder="请输入联系电话" />
+        name="phone" 
+        placeholder="请输入联系电话"  value='{{data.phone}}'  />
     </view>
 
     <view class="input-group" style="margin-bottom:5px !important;">
       <view class="input-label">收件地址</view>
       <picker 
-        name="country"
+        name="code"
         value="{{countries[index].code}}"
         range="{{countries}}" 
         bindchange="onChangeCountry" 
@@ -36,21 +36,22 @@
           mode="region" 
           name="region"
           value="{{region}}"
+          bindchange="onChangRegion" 
           class="mb5">
           <view>{{region[0]}} {{region[1]}} {{region[2]}}</view>
         </picker>
         <textarea 
           style="width:auto;"
           class="input"
-          name="street" 
-          placeholder="请输入详细街道信息" />
+          name="detail" 
+          placeholder="请输入详细街道信息"  value='{{data.detail}}'  />
       </view>
     </view>
 
     <view class="input-group">
       <view class="input-label">设为默认</view>
       <checkbox-group name="default">
-        <checkbox value="{{true}}" />
+        <checkbox value="{{true}}" checked="{{data.default == 1}}" />
       </checkbox-group>
     </view>
 

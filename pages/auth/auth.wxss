@@ -1,0 +1,27 @@
+.header {
+  background:#eee;
+  padding:8px 15px;
+  box-sizing:border-box;
+}
+input {
+  background: white;
+  padding: 8px 15px;
+  height: auto;
+  box-sizing: border-box;
+  border-bottom: 1px solid lightgrey;
+}
+.note {
+  font-size: 12px;
+  margin-bottom: 20px;
+  color: grey;
+}
+.picker {
+  flex-grow: 1;
+  margin: 0 5px;
+  text-align:center;
+  padding:30px 10px;
+  box-sizing: border-box;
+  border:1px dashed lightgrey;
+}
+button {
+}

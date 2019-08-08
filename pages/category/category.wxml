@@ -1,29 +1,37 @@
 <import src="../../templates/search.wxml" />
 
-<template is="search" />
+<view style="position:fixed;top:0;left:0;width:100%;background:#f3f4f6;z-index:99;">
+  <template is="search" />
+</view>
+
 <view class="container">
   <!-- 左侧一级分类 -->
-  <scroll-view class="left" scroll-y="true">
+  <view class="left" scroll-y="true">
+    <scroll-view>
     <view wx:for="{{category}}"
       bindtap="setActive" data-index="{{index}}"
       class="left__item {{active == index && 'left__item_active'}}">
       <!--image src="{{item.image_path}}" style="width:40px;height:40px;"/-->
-      <view>{{item.name}}</view>
+      <view wx:if="{{index != 0}}"><text style="font-weight:bold;font-size:30px;color:{{active == index ? '#fdc9c9' : 'lightgrey'}}">{{index}}</text><text style="font-size:20px;font-weight:bold;color:{{active == index ? '#fdc9c9' : 'lightgrey'}};">区</text></view>
+      <view wx:if="{{index == 0}}" style="font-size:20px;">{{item.name}}</view>
+      <view wx:else="{{index == 0}}">{{item.name}}</view>
     </view>
   </scroll-view>
+  </view>
 
-  <scroll-view class="right" wx:if="{{active == 0}}">
+  <view class="right" wx:if="{{active == 0}}">
+    <scroll-view>
     <view>
       <view style="display:flex;justify-content:center;margin-bottom:10px;">
-        <view bindtap="setLanguage" data-language="zh" style="padding:5px 30px;font-size:12px;border:1px solid #7840ee;{{language == 'zh' && 'background:#7840ee;color:white;'}}">中文</view>
-        <view bindtap="setLanguage" data-language="en" style="padding:5px 30px;font-size:12px;border:1px solid #7840ee;{{language == 'en' && 'background:#7840ee;color:white'}}">英文</view>
+        <view bindtap="setLanguage" data-language="zh" style="padding:5px 30px;font-size:12px;border:1px solid #ff4c4c;{{language == 'zh' && 'background:#ff4c4c;color:white;'}}">中文</view>
+        <view bindtap="setLanguage" data-language="en" style="padding:5px 30px;font-size:12px;border:1px solid #ff4c4c;{{language == 'en' && 'background:#ff4c4c;color:white'}}">英文</view>
       </view>
 
       <!-- 字母筛选 -->
       <view>
         <text wx:for="{{alphabet}}" 
           wx:key="{{index}}"
-          style="background:#e7e7e7;width:30px;height:30px;line-height:30px;text-align:center;border-radius:2px;margin:0 5px 5px 0;font-size:14px;display:inline-block;{{activeAlphabet == item && 'background:#7b39ea;color:white;'}}" bindtap="choiceAlphabet" data-value="{{item}}">{{item}}</text>
+          style="background:#e7e7e7;width:30px;height:30px;line-height:30px;text-align:center;border-radius:2px;margin:0 5px 5px 0;font-size:14px;display:inline-block;{{activeAlphabet == item && 'background:#ff4c4c;color:white;'}}" bindtap="choiceAlphabet" data-value="{{item}}">{{item}}</text>
       </view>
     </view>
 
@@ -42,19 +50,48 @@
       </navigator>
     </view>
   </scroll-view>
+  </view>
 
   <!-- 二级分类 -->
-  <view wx:else class="right" >
-    <view class="h3 text-center text-primary">{{category[active].name}}</view>
+  <view wx:else class="right">
+    <scroll-view>
+    <!--view class="h3 text-center text-primary">{{category[active].name}}</view-->
     <view class="right__container">
-      <navigator wx:for="{{category[active].child}}"
+      <!--navigator 
+        url="/pages/list/list?category={{category[active].category_id}}"
+        style="padding:10px 20px;box-sizing:border-box;border-bottom:1px solid lightgrey;width:100%;">
+        <text>全部</text>
+      </navigator-->
+      <view wx:for="{{category[active].child}}" wx:key="{{index}}"
+        style="width:100%;border-bottom:1px solid lightgrey;">
+        <view style="display:flex;justify-content:space-between;align-items:center;padding:10px 20px;box-sizing:border-box;" bindtap="onToggle" data-index="{{index}}">
+          <text>{{item.name}}</text>
+          <text wx:if="{{active2 == index}}">^</text>
+          <text wx:else>v</text>
+        </view>
+
+        <view 
+          style="background:rgba(0,0,0,0.06)" 
+          wx:if="{{active2 == index}}">
+          <!--navigator 
+            url="/pages/list/list?category={{item.category_id}}"
+            style="padding:10px 20px;box-sizing:border-box;font-size:12px;color:grey;border-bottom:1px solid lightgrey;">全部</navigator-->
+          <navigator 
+            wx:for="{{item.child}}"
+            wx:key="{{index}}"
+            url="/pages/list/list?category={{item.category_id}}"
+            style="padding:10px 20px;box-sizing:border-box;font-size:12px;color:grey;border-bottom:1px solid lightgrey;">{{item.name}}</navigator>
+        </view>
+      </view>
+      <!--navigator wx:for="{{category[active].child}}"
         wx:key="{{index}}"
         hover-class="none"
         url="/pages/list/list?category={{item.category_id}}" 
         class="right__item">
         <image src="{{item.image_path}}" mode="aspectFit" />
         <view><text style="font-size:13px;">{{item.name}}</text></view>
-      </navigator>
+      </navigator-->
     </view>
+  </scroll-view>
   </view>
 </view>

@@ -18,4 +18,29 @@ page {
 .section view {
   font-size: 14px;
   color: grey;
+  margin-bottom: 5px;
+}
+.section text {
+  font-size: 14px;
+  color: grey;
+}
+.red {
+  //color: #ff8c8c !important;
+  color: red !important;
+}
+.delivery {
+  margin: 15px 15px 0;
+  border: 2px solid lightgrey;
+  border-radius: 10px;
+  padding: 5px 15px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+.delivery image {
+  width: 40px;
+  height: 40px;
+}
+.delivery__main {
+  display: flex;
+  align-items: center;
 }

@@ -1,0 +1,9 @@
+/* pages/pointLog.wxss */
+.log-container {
+  box-sizing: border-box;
+}
+.log-item {
+  background: white;
+  padding: 5px 10px;
+  margin-bottom: 1px;
+}

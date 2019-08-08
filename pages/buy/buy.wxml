@@ -1,56 +1,148 @@
-<view>
+<scroll-view style="margin-bottom:60px;">
   <!-- 收货地址 -->
-  <view class="section" bindtap="chooseAddress">
+  <view class="section" bindtap="chooseAddress"
+    style="padding:18px 10px;">
     <view wx:if="{{address}}">
       <view>
-        <text>收货人: {{address.userName}}</text>
-        <text class="float-right">{{address.telNumber}}</text>
+        <text>收货人: {{address.name}}</text>
+        <text class="float-right">{{address.phone}}</text>
       </view>
-      <text class="text-grey small">收货地址: {{address.provinceName + address.cityName + address.countyName + address.detailInfo}}</text>
+      <text class="text-grey small">收货地址: {{address.country+address.region[0]+ address.region[1]+ address.region[2]+ address.detail}}</text>
     </view>
     <view wx:else>
       <text>选择收货地址</text>
     </view>
   </view>
 
-  <view class="section">
+  <view class="section" style="margin-bottom:0;">
     <view class="commodity-section" 
       wx:for="{{data.goods_list}}" 
       wx:key="{{index}}">
-      <image style="width:80px;height:80px;"
+      <image style="width:80px;height:80px;min-width:80px;"
         src="{{item.image}}"/>
-      <view class="commodity-section__right">
-        <view><text>{{item.goods_name}}</text></view>
+      <view class="commodity-section__right" style="display:flex;flex-direction:column;justify-content:space-between;">
+        <view>
+        <view><text class="label">自营</text><text>{{item.goods_name}}</text></view>
         <view><text class="text-grey small">{{item.goods_sku.goods_attr}}</text></view>
+      </view>
+        <view>
         <view>
           <text class="price">
             <text class="price small">￥</text>{{item.goods_price}}</text>
           <text>x{{item.total_num}}</text>
         </view>
+        <view style="color:red;margin-right:20px;font-size:12px;">商品已包税</view>
+      </view>
       </view>
     </view>
-    <view><text style="font-size:14px;color:grey;">快递: {{data.express_price}}</text></view>
+    <view>
+      <text style="font-size:14px;color:grey;">快递: {{data.express_price}}</text>
+    </view>
     <view style="text-align:right;">
       <text class="text-small">共{{data.order_total_num}}件商品，小记<text clsss="price">{{data.order_total_price}}</text></text>
     </view>
   </view>
 
-  <view class="section text-right">
-    <checkbox-group>
-      <label class="checkbox" style="font-size:14px;">
-        使用积分120积分抵12元  <checkbox />
-      </label>
-    </checkbox-group>
-  </view>
+  <view class="section">
+    <view style="margin-bottom:5px;">
+      <text>税费</text><text class="float-right">￥0.00</text>
+    </view>
+    <view style="margin-bottom:5px;">
+      <text>运费 </text>
+      <image bindtap="onGoPage" data-id="6"
+        src="/images/i.png" 
+        style="width:12px;height:12px;vertical-align:middle" />
+      <text class="float-right">￥{{data.express_price}}</text>
 
-  <view class="action">
-    <view style="flex-grow:1;text-align:right;padding-right:10px;">
-      <text style="font-size:14px;">合计金额:  </text><text class="price" style="font-size:12px;">￥</text><text class="price">{{data.order_pay_price}}</text>
     </view>
-    <view 
-      bindtap="submit"
-      style="background:#7a3ce9;height:56px;line-height:56px;width:120px;text-align:center;">
-      <text class="text-white">提交订单</text>
+    <view style="margin-bottom:5px;">
+      <text>我的积分</text><text class="float-right price" style="font-weight:normal;font-size:14px;">{{point}}积分</text>
     </view>
+    <view style="margin-bottom:5px;" wx:if="{{data.points}}">
+      <text>使用积分</text>
+      <switch class="float-right" color="#ff8c8c"
+        bindchange="checkIntegral" />
+    </view>
+    <view style="clear:both;margin-bottom:5px;" wx:if="{{data.points}}">
+      <text>抵扣金额</text><text class="float-right price" style="font-weight:normal;font-size:14px;">￥{{data.points/100}}</text>
+    </view>
+    <view style="text-align:center;margin-top:15px;box-sizing:border-box;">
+      <text style="font-size:12px;color:grey;">提交订单则表示您同意</text>
+      <text bindtap="onGoPage" data-id="5"
+        style="font-size:12px;">《用户购买协议》</text></view>
+  </view>
+</scroll-view>
+
+<view class="action">
+  <view style="flex-grow:1;text-align:right;padding-right:10px;">
+    <text style="font-size:14px;">合计金额:  </text><text class="price" style="font-size:12px;">￥</text><text wx:if="{{!useIntegral}}" class="price">{{data.order_pay_price}}</text><text wx:else class="price">{{(data.order_pay_price*100 - data.points)/100}}</text>
+  </view>
+  <view 
+    bindtap="submit"
+    class="bg-primary"
+    style="height:56px;line-height:56px;width:120px;text-align:center;">
+    <text class="text-white">提交订单</text>
+  </view>
+</view>
+
+<!-- modal-bg -->
+<view bindtap="onToggleModal" wx:if="{{modal}}"
+  style="position:fixed;top:0;left:0;width:100vw;height:100vh;background-color:rgba(0,0,0,0.6);"></view>
+<!-- modal -->
+<view wx:if="{{modal}}"
+  style="position:fixed;bottom:0;left:0;width:100vw;background:white;">
+  <view style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;box-sizing:border-box;border-bottom:1px solid rgba(0,0,0,0.06);">
+    <text>实名认证</text>
+    <text bindtap="onToggleModal">X</text>
+  </view>
+  <view style="padding:10px;box-sizing:border-box;">
+    <view style="margin-bottom:10px;font-size:12px;color:#ff8c8c;">根据海关要求，购买跨境商品需要提供订购人身份信息，本信息仅用于海关清关，千樱保证信息安全。</view>
+    <form bindsubmit="onSubmitAuth">
+      <view style="background:rgba(0,30,40,0.06);font-size:12px;box-sizing:border-box;padding:5px 10px;margin-bottom:10px;">
+        <input
+          name="name"
+          type="text"
+          value="{{authData.name}}"
+          placeholder="真实姓名" />
+      </view>
+      <view style="background:rgba(0,30,40,0.06);font-size:12px;box-sizing:border-box;padding:5px 10px;margin-bottom:10px;">
+        <input type="idcard"
+          name="cardno"
+          value="{{authData.cardno}}"
+          placeholder="身份证号码（将加密处理）" />
+      </view>
+      <view style="background:rgba(0,30,40,0.06);font-size:12px;box-sizing:border-box;padding:5px 10px;margin-bottom:10px;">
+        <input name="mobile"
+          type="number"
+          value="{{authData.mobile}}"
+          placeholder="手机号码(与上述实名一致的手机号)" />
+      </view>
+
+      <view wx:if="{{authStatus == 2}}"
+        style="background:rgba(0,30,40,0.06);box-sizing:border-box;padding:10px;margin-bottom:10px;">
+        <view style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <text style="font-size:12px;">请上传身份证正反面共两张照片</text>
+          <text style="font-size:12px;color:grey;">照片示例</text>
+        </view>
+        <view style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <view wx:if="{{!front}}" bindtap="onChooseImage" data-name="front"
+            style="border:1px dashed lightgrey;width:48%;padding:25px 0;text-align:center;">
+            <view style="font-size:32px;color:grey;line-height:28px;">+</view>
+            <view style="color:grey;">人像面</view>
+          </view>
+          <image wx:else bindtap="onChooseImage" data-name="front" src="{{front}}" mode="widthFix" style="width:48%;" />
+          <view wx:if="{{!back}}" bindtap="onChooseImage" data-name="back"
+            style="border:1px dashed lightgrey;width:48%;padding:25px 0;text-align:center;">
+            <view style="font-size:32px;color:grey;line-height:28px;">+</view>
+            <view style="color:grey;">非人像面</view>
+          </view>
+          <image wx:else bindtap="onChooseImage" data-name="back" src="{{back}}" mode="widthFix" style="width:48%;" />
+        </view>
+        <view style="font-size:12px;color:grey;">温馨提示：请勿裁剪涂改照片，保证身份信息清晰显示，否则无法通过审核。若身份证不在身边，无法拍照，可先提交订单，付款后认证。</view>
+      </view>
+      <!--view style="text-align:right;margin-bottom:10px;font-size:12px;color:grey;">了解实名认证</view-->
+      <button form-type="submit" class="bg-primary"
+        style="color:white;font-size:12px;padding:8px;height:auto;line-height:initial;margin-top:10px;">提交</button>
+    </form>
   </view>
 </view>

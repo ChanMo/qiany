@@ -3,29 +3,53 @@ const app = getApp()
 
 Page({
   data: {
-    data: []
+    data: [],
+    buy:0
   },
 
-  onLoad: function() {
+  onLoad: function(options) {
+    if (options['type'] === 'buy'){
+      this.setData({buy:1})
+    }
+  },
+
+  onShow: function() {
     this._fetchAddress()
+  },
+
+  selectaddress: function(e){
+    var that = this;
+    
+    wx.navigateBack();
+    // 往上一级页面传参
+    var pages = getCurrentPages();
+    var currPage = pages[pages.length - 1]; // 当前页面
+    var prevPage = pages[pages.length - 2]; // 上一级页面
+
+    // 直接调用上一级页面Page对象，存储数据到上一级页面中
+    var addressid = e.currentTarget.dataset.addressid;
+    wx.request({
+      url: api.addressdetail + '?address_id=' + addressid + '&token=' + app.globalData.token,
+      success: res => prevPage.setData({ address: res.data.data })
+    })
   },
 
   /**
    * 获取地址列表
    */
   _fetchAddress: function() {
-    this.setData({
-      data: [
-        {'id':1, 'name':'ChanMo', 'mobile':'15550001234', 'region':'山东济南高新区', 'street':'会展西路88号','default':true},
-        {'id':2, 'name':'小花花', 'mobile':'15550001238', 'region':'山东烟台开发区', 'street':'滨海路2号','default':false},
-      ]
-    })
-    return
+   
     const self = this
-    const url = api.address + '?token=' + app.globalData.token
+    let url = api.address + '?token=' + app.globalData.token
+    if(this.data.buy) {
+      url += '&c=true'
+    }
     wx.request({
       url: url,
-      success: (res)=>self.setData({data: res.data.data})
+      success: function (res) {
+        console.log(res)
+        self.setData({ list: res.data.data})
+      }
     })
   }
 })

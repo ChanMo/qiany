@@ -11,12 +11,17 @@ page {
   margin-bottom: 5px;
   font-size: 14px;
 }
+.option__main {
+  display: flex;
+  flex-wrap: wrap;
+}
 .option__main text {
   padding: 5px 15px;
   border-radius: 5px;
   border: 1px solid lightgrey;
   margin: 0 5px 5px 0;
   font-size: 12px;
+  white-space: nowrap;
 }
 .option__main .active {
   border-color: #7a3ce9;
@@ -61,18 +66,18 @@ page {
   display: flex;  
   border: 1px solid lightgrey;
   border-radius: 2px;
-  height: 30px;
-  line-height: 30px;
+  height: 22px;
+  line-height: 22px;
 }
 .count__action {
-  width: 30px;
+  width: 22px;
   text-align: center;
   font-size: 14px;
 }
 .count__input {
-  width: 50px;
+  width: 40px;
   text-align: center;
   border-left: 1px solid lightgrey;
   border-right: 1px solid lightgrey;
-  font-size: 14px;
+  font-size: 12px;
 }

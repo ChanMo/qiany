@@ -2,23 +2,27 @@
   <view class="header">
     <image 
       style="width:100px;height:100px;"
-      src="https://img.alicdn.com/imgextra/i2/TB2nMPEemzqK1RjSZPcXXbTepXa_!!0-juitemmedia.jpg_270x270.jpg" />
+      src="{{order.goods[0].image.file_path}}" />
     <view class="header__right">
-      <view style="font-size:14px;margin-bottom:10px;">已签收</view>
-      <view style="font-size:12px;color:grey;">申通快递: 201808120091931</view>
+      <view style="font-size:14px;margin-bottom:10px;" wx:if="{{data.State == 2}}">在途中</view>
+      <view style="font-size:14px;margin-bottom:10px;" wx:if="{{data.State == 3}}">已签收</view>
+      <view style="font-size:14px;margin-bottom:10px;" wx:if="{{data.State == 4}}">问题件</view>
+      <view style="font-size:12px;color:grey;">{{data.ShipperName}}: {{data.LogisticCode}}</view>
     </view>
   </view>
   <view class="delivery">
-    <view class="delivery__item" wx:for="{{list}}">
-      <view style="width:12%;text-align:center;">
+    <view class="delivery__item" 
+      wx:for="{{list}}"
+      wx:key="*this">
+      <view style="width:12%;min-width:12%;text-align:center;">
         <view>{{item.date}}</view>
         <view class="text-grey small">{{item.time}}</view>
       </view>
       <view class="middle {{item.active && 'text-primary'}}">O
         <view class="middle-line" ></view></view>
       <view>
-        <view>{{item.title}}</view>
-        <view class="text-grey small">{{item.content}}</view>
+        <view>{{item.AcceptStation}}</view>
+        <!--view class="text-grey small">{{item.content}}</view-->
       </view>
     </view>
   </view>

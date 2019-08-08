@@ -1,0 +1,17 @@
+<!--pages/pointLog.wxml-->
+<scroll-view class="log-container">
+  <view 
+    class="log-item row row_between"
+    wx:if="{{data}}"
+    wx:for="{{data}}"
+    wx:key="**this">
+    <view>
+      <view class="h4">{{item.desc}}</view>
+      <view class="small text-grey">{{item.create_time}}</view>
+    </view>
+    <text class="h2">{{item.money}} <text style="font-weight:normal;font-size:12px;">积分</text></text>
+  </view>
+  <view 
+    wx:if="{{logTo.length == 0}}"
+    class="mt20 text-center">这里什么都没有</view>
+</scroll-view>

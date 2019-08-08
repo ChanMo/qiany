@@ -1,14 +1,14 @@
 <import src="../../templates/commodity" />
 <scroll-view class="container">
-  <text class="header">{{article.title}}</text>
+  <!--text class="header">{{article.title}}</text-->
   <rich-text 
-    nodes="{{article.content}}"
-    style="margin-bottom:15px;display:block;">
+    nodes="{{content}}"
+    style="margin-bottom:15px;display:block;padding:0">
   </rich-text>
   <view class="commodity-container">
     <template 
       wx:for="{{article.commodities}}" 
       is="commodity" 
-      data="{{out:15,flex:3,name:item.name,cover:item.cover,price:item.price}}" />
+      data="{{out:15,flex:3,id:item.goods_id,name:item.goods_name,cover:item.image,price:item.spec[0].goods_price}}" />
   </view>
 </scroll-view>

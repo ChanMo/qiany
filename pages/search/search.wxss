@@ -11,9 +11,8 @@ page {
 }
 .label {
   display:inline-block;
-  background:#dfdfdf;
-  border-radius:5px;
-  padding:8px 20px;
+  border-radius:10px;
+  padding:5px 15px;
   font-size:14px;
   font-weight: 300;
   margin: 0 10px 5px 0;

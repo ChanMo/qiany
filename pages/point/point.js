@@ -7,12 +7,16 @@ Page({
     point: 0, // 积分余额
     team: [], // 团队列表
     log: [], // 积分记录
+    logFrom: [], // 积分来源
+    logTo: [] // 积分使用
   },
 
   onLoad: function() {
     this._fetchPoint()
     this._fetchTeam()
-    this._fetchLog()
+    //this._fetchLog()
+    this.fetchLogFrom()
+    this.fetchLogTo()
   },
 
   /**
@@ -56,5 +60,21 @@ Page({
       url: url,
       success: (res)=>self.setData({log: res.data.data})
     })
+  },
+
+  fetchLogFrom: function() {
+    const self = this
+    const url = api.pointFrom + '?token=' + app.globalData.token
+    wx.request({url, success:res=>self.setData({logFrom: res.data.data.data})})
+  },
+
+  fetchLogTo: function () {
+    const self = this
+    const url = api.pointTo + '?token=' + app.globalData.token
+    wx.request({ url, success: res => self.setData({ logTo: res.data.data.data }) })
+  },  
+
+  onGoLog: function() {
+    wx.navigateTo({ url: '/pages/pointLog/pointLog' })
   }
 })

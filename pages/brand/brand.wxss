@@ -1,7 +1,8 @@
 page {
-  background: white;
+  background: #f3f4f6;
 }
 .nav {
+  background: white;
   display: flex;
   justify-content: space-around;
   padding: 10px;
@@ -11,7 +12,7 @@ page {
   font-size: 14px;
 }
 .nav_active {
-  color: #7840ee;
+  color: #ff8c8c;
 }
 scroll-view {
   padding: 0 10px;

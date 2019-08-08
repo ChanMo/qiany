@@ -37,20 +37,21 @@ Page({
   },
   _fetchBrand: function() {
     let self = this
-    let url = api.brand + '?brand_id=' + this.data.id
+    let url = api.brand + '?brand_id=' + this.data.id + '&token=' + app.globalData.token
     wx.request({url, success:function(res){
       self.setData({brand:res.data.data})
     }})
   },
   _fetchCommodities: function() {
     let self = this
-    let url = api.commodities
+    let url = api.commodities + '?token=' + app.globalData.token
     wx.request({url,
       method:'POST',
       data:{
         brand_id: this.data.id,
         sortType: this.data.sort,
         sortPrice: this.data.asc,
+        length: 50
       },
       success: function(res) {
         self.setData({commodities: res.data.data.data})

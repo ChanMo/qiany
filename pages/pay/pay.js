@@ -7,6 +7,7 @@ Page({
     amount: 0.00
   },
   onLoad: function(options) {
+    console.log(options)
     this.setData({
       order: options['order'],
       amount: options['amount']

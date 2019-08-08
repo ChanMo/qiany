@@ -1,0 +1,138 @@
+<view class="container">
+  <scroll-view>
+    <checkbox-group bindchange="checkboxChange">
+      <block wx:for="{{goodList}}" wx:key="{{index}}">
+        <view class="commodity">
+          <!-- 选择 -->
+          <label class="checkbox" style="align-self:center">
+            <checkbox value="{{item.key}}" checked='{{item.checked}}' color="white" style="position:relative;border:none !important;background:white;background-image:none;">
+              <view style="position:absolute;top:0;left:0;background:white;width:30px;height:30px;">
+                <!-- checkbox -->
+                <view 
+                  wx:if="{{item.checked}}"
+                  style="width:20px;height:20px;border:1px solid red;border-radius:10px;background:red;">
+                  <image src="/images/check.svg" 
+                    style="width:20px;height:20px;" />
+                </view>
+                <view 
+                  wx:else
+                  style="width:20px;height:20px;border:1px solid lightgrey;border-radius:10px;">
+                  <image src="/images/check-o.svg" 
+                    style="width:20px;height:20px;" />
+                </view>
+              </view>
+            </checkbox>
+          </label>
+
+          <image 
+            data-id="{{item.goods_id}}"
+            bindtap="goToCommodity"
+            style="width:110px;height:110px;min-width:110px;"
+            src="{{item.image}}" />
+
+          <view class="commodity__main">
+
+            <view style="display:flex;justify-content:space-between;align-items:center;">
+              <!-- 商品名称，参数 -->
+              <view>
+                <navigator 
+                  style="margin-bottom:5px;"
+                  url="/pages/commodity/commodity?id={{item.goods_id}}">
+                  <text class="label">自营</text>
+                  <text 
+                    class="commodity__title" 
+                    style="font-weight:bold;">{{item.goods_name}}</text>
+                </navigator>
+
+                <view
+                  wx:if="{{item.goods_sku.goods_attr}}"
+                  class="commodity__params">
+                  {{item.goods_sku.goods_attr}}</view>
+                <view wx:else style="height:20px;width:100%"></view>
+              </view>
+  
+              <!-- 删除 -->
+              <image 
+                data-id="{{item.goods_id}}"
+                data-sku="{{item.goods_sku_id}}"
+                src="/images/trash-2.svg" 
+                bindtap="onDelete"
+                style="margin:5px;min-width:12px;width:12px;height:12px;" />
+  
+            </view>
+
+            <!-- 价格，数量 -->
+            <view>
+              <view style="display:flex;justify-content:space-between;">
+                <text class="price">
+                  <text class="price" style="font-size:12px;">￥</text>{{item.goods_sku.goods_price}}</text>
+
+                <!-- 数量加减 -->
+                <view class="counter">
+                  <view class="counter__action" 
+                    data-value="{{item.total_num}}"
+                    data-id="{{item.goods_id}}" 
+                    data-sku="{{item.goods_sku_id}}"
+                    bindtap="onDecrease">-</view>
+                  <view class="counter__value">{{item.total_num}}</view>
+                  <view class="counter__action"
+                    data-id="{{item.goods_id}}" 
+                    data-sku="{{item.goods_sku_id}}"
+                    bindtap="onIncrease">+</view>
+                </view>
+                <!-- end -->
+
+              </view>
+              <view>
+                <text style="color:red;margin-right:20px;font-size:12px;">商品已包税</text>
+                <text style="font-size:12px;">运费: {{item.storage.freight}} </text>
+                <image bindtap="onGoPage" data-id="6"
+                  src="/images/i.png" 
+                  style="width:12px;height:12px;vertical-align:middle" />
+                <text wx:if="{{item.code == 'CN'}}" style="font-size:12px;color:red;"> 中国</text>
+                <text wx:if="{{item.code == 'KR'}}" style="font-size:12px;color:red;"> 韩国</text>
+                <text wx:if="{{item.code == 'AU'}}" style="font-size:12px;color:red;"> 澳洲</text>
+                <text wx:if="{{item.code == 'UK'}}" style="font-size:12px;color:red;"> 英国</text>
+
+              </view>
+            </view>
+            <!-- end -->
+          </view>
+
+        </view>
+      </block>
+      <view style="margin-bottom:50px;padding:20px 0;text-align:center;box-sizing:border-box;font-weight:bold;color:lightgrey;">~ 没有更多了 ~</view>
+    </checkbox-group>
+  </scroll-view>
+  <view class="footer"> 
+    <label class="checkbox">
+      <checkbox-group bindchange="selectalltap">
+        <checkbox value="true" color="#ff8c8c" style="position:relative;border:none !important;background:white;background-image:none;">
+            <view style="position:absolute;top:0;left:0;background:white;width:30px;height:30px;">
+              <view 
+                wx:if="{{checkAll}}"
+                style="width:20px;height:20px;border:1px solid red;border-radius:10px;background:red;">
+                <image src="/images/check.svg" 
+                  style="width:20px;height:20px;" />
+              </view>
+              <view 
+                wx:else
+                style="width:20px;height:20px;border:1px solid lightgrey;border-radius:10px;">
+                <image src="/images/check-o.svg" 
+                  style="width:20px;height:20px;" />
+              </view>
+            </view>
+        </checkbox><text>全选</text>
+      </checkbox-group>
+    </label>
+    <view>
+      <text>合计: </text>
+      <text class="price">￥{{totalPrice}}</text>
+      <text class="text-grey" style="font-size:12px;"> (不含运费)</text>
+    </view>
+    <view style="padding: 30rpx 80rpx;" bindtap="submit"
+      class="bg-primary">
+      <text style="color:white">结算</text>
+    </view>
+  </view>
+</view>

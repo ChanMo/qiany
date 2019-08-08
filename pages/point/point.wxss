@@ -6,7 +6,7 @@ text {
 .nav {
   display: flex;
   justify-content: space-around;
-  padding: 0 20vw;
+  padding: 0 15vw;
   box-sizing: border-box;
   background: white;
 }
@@ -16,10 +16,8 @@ text {
   border-bottom: 2px solid transparent;
 }
 .nav_active {
-  border-color: #7a3ce9 !important;
 }
 .main {
-  background: #7a3ce9;
   margin: 15px;
   padding: 10vmin 0;
   box-sizing: border-box;

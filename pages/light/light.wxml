@@ -1,14 +1,15 @@
 <scroll-view class="container">
   <navigator 
     hover-class="none"
-    url="/pages/article/article?id=item.id" 
+    url="/pages/article/article?id={{item.id}} "
     class="article" wx:for="{{data}}">
-    <view class="header">
-      <text>{{item.title}}</text></view>
-    <view class="image-container">
+    <!--view class="header">
+      <text>{{item.title}}</text></view-->
+    <image src="{{item.images[0]}}" style="width:100%;margin:0;" mode="widthFix" />
+    <!--view class="image-container">
       <view wx:for="{{item.images}}">
         <image src="{{item}}" /></view>
-    </view>
-    <view class="date"><text>06-15 14:20</text></view>
+    </view-->
+    <!--view class="date"><text>{{item.create_time}}</text></view-->
   </navigator>
 </scroll-view>

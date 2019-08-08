@@ -1,12 +1,12 @@
 <import src="../../templates/commodity.wxml" />
 
 <!-- 品牌banner图 -->
-<image src="{{brand.banner_path}}" style="width:100%;height:30vw" />
+<image src="{{brand.banner_path}}" style="width:100%;height:50vw" />
 
 <!-- 品牌简介 -->
-<view style="padding:10px 20px;">
+<view style="padding:10px 20px;background:white;">
   <view style="font-size:14px;">品牌简介:</view>
-  <text style="font-size:12px;color:grey;">{{brand.content}}</text>
+  <rich-text nodes="{{brand.content}}"></rich-text>
 </view>
 
 <!-- 排序 -->
@@ -17,10 +17,10 @@
     class="{{sort == 'all' ? 'nav_active' : null}}">综合</text>
   <text wx:if="{{asc}}"
     data-value="price" data-asc="true" bindtap="setSort"
-    class="{{sort == 'price' ? 'nav_active' : null}}">价格^</text>
+    class="{{sort == 'price' ? 'nav_active' : null}}">价格v</text>
   <text wx:else
     data-value="price" data-asc="false" bindtap="setSort"
-    class="{{sort == 'price' ? 'nav_active' : null}}">价格v</text>
+    class="{{sort == 'price' ? 'nav_active' : null}}">价格^</text>
   <text
     data-value="sales" bindtap="setSort"
     class="{{sort == 'sales' ? 'nav_active' : null}}">销量</text>

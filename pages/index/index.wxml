@@ -1,27 +1,57 @@
 <import src="../../templates/commodity.wxml" />
+<!-- modal -->
+<block wx:if="{{!loading && !auth}}">
+  <view style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.4);z-index:99"></view>
+  <view style="width:70%;background:white;padding:20px;text-align:center;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);;z-index:99">
+    <view style="color:grey;margin-bottom:15px;font-size:14px;">为了提供更好的操作体验，我们需要获取您的头像昵称等基础信息</view>
+    <button type="primary" open-type="getUserInfo" bindgetuserinfo="getUserInfo">确定</button>
+  </view>
+</block>
 
-<scroll-view style="flex:1">
+<block wx:if="{{!loading && auth && parentModal}}">
+  <view style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.4);z-index:99"></view>
+  <view style="width:70%;background:white;padding:20px;text-align:center;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);;z-index:99">
+    <view style="color:grey;margin-bottom:15px;font-size:14px;">是否更换上级为"{{parentName}}"?</view>
+    <view>
+      <button type="primary" size="mini" plain="true" style="margin-right:10px;" bindtap="onChangeParent">确定</button>
+      <button size="mini" plain="true" bindtap="onParentModalCancel">取消</button>
+    </view>
+  </view>
+</block>
+
+<scroll-view style="flex:1" wx:if="{{!loading}}">
   <!-- 轮播图 -->
   <swiper class="banner" style="margin-bottom:10px;"
+    current="{{0}}"
     autoplay="true"
     circular="true"
-    indicator-active-color="#7a3ce9"
+    indicator-active-color="#ff8c8c"
     indicator-dots="true">
-    <block wx:for="{{banner}}" wx:key="{{index}}">
+    <block wx:for="{{banner}}" wx:key="*this">
       <swiper-item style="width:100%">
-        <image src="{{item.imgUrl}}" class="banner-image" />
+        <navigator url="{{item.link}}">
+          <image src="{{item.image_path}}" class="banner-image"/>
+        </navigator>
       </swiper-item>
     </block>
   </swiper>
-
+<view class="country">
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+    <view style="display:flex;align-items:center;">
+      <text style="margin-right:2px;">{{array[index]}}</text>
+      <image src="/images/c{{index}}.png"
+        style="width:30px;" mode="widthFix" /> 
+    </view>
+  </picker>
+</view>
   <!-- 搜索框 -->
-  <navigator class="search" url="/pages/search/search">
+  <navigator class="search border-primary" url="/pages/search/search">
     <text class="text-grey text-small">输入关键字进行搜索</text>
     <image src="../../images/search.png" style="width:20px;height:20px" />
   </navigator>
 
   <!-- 板块 -->
-  <view style="display:flex;flex-wrap:wrap;">
+  <view style="display:flex;flex-wrap:wrap;background:white;border-radius:10px;margin:0 10px;">
     <block wx:for="{{link}}" wx:key="{{index}}">
       <navigator 
         style="width:20%;text-align:center;padding:10px 0;"
@@ -35,11 +65,19 @@
     </block>
   </view>
 
+  <!-- 活动 -->
+  <view style="padding:10px 15px;box-sizing:border-box;">
+  <navigator url="{{item.link}}" wx:for="{{ad}}" wx:key="*this">
+    <image
+      src="{{item.image_path}}" style="width:100%;margin-bottom:5px" mode="widthFix" />
+      </navigator>
+  </view>
+
   <!-- 推荐商品 -->
-  <view style="margin:15px 0 5px;text-align:center;">
+  <view style="padding:15px 0 5px;text-align:center;background-image:linear-gradient(#fcebe1,#ffffff);box-sizing:border-box;">
     <image src="../../images/hotTitle.png" style="width:92px;height:18px;" />
   </view>
-  <view style="display:flex;flex-wrap:wrap;padding:0 10px">
+  <view style="display:flex;flex-wrap:wrap;padding:0 10px;background:#f3f4f6;">
     <template wx:for="{{hot}}" wx:key="{{index}}"
       is="commodity"
       data="{{out:10,flex:2,id:item.goods_id,name:item.goods_name,cover:item.image,price:item.spec[0].goods_price}}" />

@@ -1,6 +1,6 @@
 /* pages/commodityList/commodityList.wxss */
 page {
-  background: white;
+  background: #f3f4f6;
 }
 .nav {
   display: flex;
@@ -12,11 +12,10 @@ page {
   font-size: 14px;
 }
 .nav_active {
-  color: #7a3ce9;
+  color: #ff8c8c;
 }
 scroll-view {
-  padding: 0 10px;
-  box-sizing: border-box;
+
 }
 .commodity {
   width: 50%;

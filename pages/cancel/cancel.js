@@ -17,10 +17,15 @@ Page({
     const url = api.cancel + '?token=' + token + '&order_id=' + this.data.order
     wx.request({url,
       success:res=>{
-        wx.showToast({title:'取消成功'})
-        setTimeout(()=>wx.navigateBack(), 1500)
+        wx.hideLoading()
+        wx.showToast({ title: '取消成功', duration: 3000})
+        setTimeout(()=>wx.navigateBack(), 3500)
       },
-      fail:error=>wx.showToast({title:'服务器错误'}),
-      complete: ()=>wx.hideLoading()})
+      fail: error => {
+        wx.hideLoading()
+        wx.showToast({ title: '服务器错误', duration: 3000})
+      },
+      //complete: ()=>wx.hideLoading()
+      })
   }
 })

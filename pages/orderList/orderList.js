@@ -3,7 +3,7 @@ const app = getApp()
 
 Page({
   data: {
-    active: 'payment',
+    active: 'all',
     orders: []
   },
   onLoad: function(option) {
@@ -27,5 +27,38 @@ Page({
         self.setData({orders: res.data.data.list})
       }
     })
+  },
+  /**
+   * 微信支付
+   */
+  pay: function(e) {
+    let id = e.currentTarget.dataset.id
+    wx.showLoading({title:'支付请求中',mask:true})
+    const url = api.pay + '?token=' + wx.getStorageSync('token') + '&order_id=' + id
+    wx.request({url, success:res=>{
+      if(res.data.code == 1) {
+        wx.requestPayment({
+          timeStamp: res.data.data.timeStamp,
+          nonceStr: res.data.data.nonceStr,
+          package: 'prepay_id='+res.data.data.prepay_id,
+          signType: 'MD5',
+          paySign: res.data.data.paySign,
+          success: ress=>{
+            console.log(ress)
+            wx.navigateTo({url:'/pages/paySuccess/paySuccess?id='+id})
+          },
+          fail: error=>{
+            wx.showToast({title:'支付失败'})
+          }
+        })
+
+      } else {
+        wx.showToast({title:res.data.msg})
+      }
+    }, complete:()=>{
+      wx.hideLoading()
+    }})
+    //wx.showToast({title:'支付成功'})
   }
+
 })

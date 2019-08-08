@@ -1,18 +1,27 @@
 /* pages/category/category.wxss */
 page {
-  background: white;
+  background: #f3f4f6;
 }
 .container {
-  display: flex;
+  margin-top: 54px;
+  //display: flex;
 }
 .left {
   width: 30%;
   height: calc(100vh - 54px);
   background: rgba(0,0,0,0.06);
+  overflow: scroll;
 }
 .left__item {
   text-align: center;
-  padding: 10px 0;
+  padding: 12px 0;
+  border-left: 2px solid transparent;
+  height: 28vmin;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 .left__item image {
   width: 25px;
@@ -22,16 +31,25 @@ page {
   font-size: 12px;
   color: #3a3a3a;
 }
+.left__item__header {
+  font-size: 28px !important;
+  color: lightgrey !important;
+  font-weight: bold;
+}
 .left__item_active {
+  background: #f3f4f6;
+  border-color: #ff4c4c;
 }
 .left__item_active view {
   font-size: 12px;
-  color: #7a3ce9;
+  color: #ff4c4c;
 }
 .right {
   width: 75%;
+  height: calc(100vh - 54px);
   padding: 0 10px 10px;
   box-sizing: border-box;
+  overflow: scroll;
 }
 .right__container {
   display: flex;

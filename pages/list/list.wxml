@@ -1,24 +1,37 @@
 <import src="../../templates/search.wxml" />
 <import src="../../templates/commodity.wxml" />
-<template is="search" />
-
-<view class="nav">
+<!--view class="bg-white" style="position:relative;padding:10px 0;">
+  <template is="search" />
+</view-->
+<scroll-view style="height:100vh;"
+  bindscrolltolower="onLoadMore" scroll-y lower-threshold="100">
+<navigator wx:if="{{ad.length > 0}}" class="bg-white" url="{{ad[0].link}}">
+<image src="{{ad[0].image_path}}" style="width:100%;margin-bottom:5px;" mode="widthFix" />
+</navigator>
+<view class="nav bg-white">
   <text 
     data-value="all" bindtap="setSort"
     class="{{sort == 'all' ? 'nav_active' : null}}">综合</text>
   <text wx:if="{{asc}}"
     data-value="price" data-asc="true" bindtap="setSort"
-    class="{{sort == 'price' ? 'nav_active' : null}}">价格^</text>
+    class="{{sort == 'price' ? 'nav_active' : null}}">价格v</text>
   <text wx:else
     data-value="price" data-asc="false" bindtap="setSort"
-    class="{{sort == 'price' ? 'nav_active' : null}}">价格v</text>
+    class="{{sort == 'price' ? 'nav_active' : null}}">价格^</text>
   <text
     data-value="sales" bindtap="setSort"
     class="{{sort == 'sales' ? 'nav_active' : null}}">销量</text>
 </view>
 
-<scroll-view>
+<view style="padding: 0 10px;box-sizing: border-box;">
   <template wx:for="{{data}}" 
+    wx:key="{{index}}"
     is="commodity"
     data="{{out:10,flex:2, id:item.goods_id, name:item.goods_name, cover:item.image, price:item.goods_min_price}}" />
+    <view style="clear:both;"></view>
+  <view style="text-align:center;margin-bottom:15px;">
+    <text wx:if="{{fetching}}" style="color:darkgrey">加载中...</text>
+    <text wx:if="{{currentPage == totalPage}}" style="color:darkgrey;">- 到底啦 -</text>
+  </view>
+  </view>
 </scroll-view>

@@ -1,19 +1,22 @@
 <scroll-view>
   <view 
-    wx:for="{{data}}" 
+    wx:for="{{list}}" 
     wx:key="{{index}}" 
     class="item">
-    <view>
+    <radio wx:if="{{buy}}" style='width:25px;height:25px;margin-right:10px;'
+     bindtap="selectaddress" 
+     data-addressid='{{item.address_id}}'></radio>
+    <view style="flex-grow:1">
       <view style="margin-bottom:2px;">
         <text class="name">{{item.name}}</text>
-        <text>{{item.mobile}}</text>
+        <text>{{item.phone}}</text>
       </view>
       <view>
         <text wx:if="{{item.default}}" class="default">[默认]</text>
-        <text class="small text-grey">{{item.region}}{{item.street}}</text>
+        <text class="small">{{item.country}}{{item.region[0]}}{{item.region[1]}}{{item.region[2]}}{{item.detail}}</text>
       </view>
     </view>
-    <navigator url="/pages/address/address?id={{item.id}}"
+    <navigator url="/pages/address/address?id={{item.address_id}}"
       class="edit">编辑</navigator>
   </view>
 </scroll-view>

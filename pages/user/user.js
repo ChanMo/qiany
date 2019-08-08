@@ -6,32 +6,38 @@ Page({
     user: null,
     link: [], // 功能链接
     order: [], // 订单链接
+    point: 0, // 积分
   },
-  onLoad: function() {
+  onShow: function() {
     this.setData({user:app.globalData.userInfo})
     this._setOrder()
     this._fetchLink()
+    this.fetchPoint()
   },
+
 
   /**
-   * 获取用户信息
+   * 获取积分总数
    */
-  onGotUserInfo: function(res) {
-    let userInfo = res.detail.userInfo
-    app.globalData.userInfo = userInfo
-    this.setData({user:userInfo})
+  fetchPoint: function () {
+    const self = this
+    const url = api.point + "?token=" + app.globalData.token
+    wx.request({
+      url: url,
+      success: (res) => self.setData({ point: res.data.data.userInfo.money })
+    })
   },
-
   /**
    * 设置功能列表
    */
   _fetchLink: function() {
     let data = [
-      {"name":"我的二维码","icon":"http://doyou.oss-cn-beijing.aliyuncs.com/icon/qrcode.png","path":"/pages/qrcode/qrcode"},
-      {"name":"我的分销","icon":"http://doyou.oss-cn-beijing.aliyuncs.com/icon/user.png","path":"/pages/point/point"},
-      {"name":"地址管理","icon":"http://doyou.oss-cn-beijing.aliyuncs.com/icon/qrcode.png","path":"/pages/addresses/addresses"},
-      {"name":"积分规则","icon":"http://doyou.oss-cn-beijing.aliyuncs.com/icon/point.png","path":"/pages/page/page?slug=1"},
-      {"name":"买家须知","icon":"http://doyou.oss-cn-beijing.aliyuncs.com/icon/book.png","path":"/pages/page/page?slug=2"}
+      {"name":"我的二维码","icon":"../../images/qrcode2.png","path":"/pages/qrcode/qrcode"},
+      {"name":"实名认证","icon":"../../images/shimingrenzheng.png","path":"/pages/auth/auth"},
+      {"name":"积分中心","icon":"../../images/wodefenxiao.png","path":"/pages/point/point"},
+      {"name":"地址管理","icon":"../../images/dizhiguanli.png","path":"/pages/addresses/addresses"},
+      { "name": "积分规则", "icon":"../../images/jifenguize.png","path":"/pages/jifenguize/jifenguize"},
+      {"name":"买家须知","icon":"../../images/maijiaxuzhi.png","path":"/pages/maijiaxuzhi/maijiaxuzhi"}
     ]
     this.setData({link:data})
   },
@@ -41,31 +47,14 @@ Page({
    */
   _setOrder: function() {
     let data = [
-      {"name":"待付款","icon":"http://doyou.oss-cn-beijing.aliyuncs.com/icon/nopay.png","param":"payment"},
-      {"name":"待发货","icon":"http://doyou.oss-cn-beijing.aliyuncs.com/icon/gift.png","param":"delivery"},
-      {"name":"待收货","icon":"http://doyou.oss-cn-beijing.aliyuncs.com/icon/delivery.png","param":"received"},
-      {"name":"已收货","icon":"http://doyou.oss-cn-beijing.aliyuncs.com/icon/send.png","param":"finished"},
-      {"name":"退款","icon":"http://doyou.oss-cn-beijing.aliyuncs.com/icon/refund.png","param":"refund"}
+      {"name": "全部订单", "icon": "../../images/quanbudingdan.png", "param": "all" },
+      {"name":"待付款","icon":"../../images/daifukuan.png","param":"payment"},
+      {"name":"待发货","icon":"../../images/daifahuo.png","param":"delivery"},
+      {"name":"待收货","icon":"../../images/daishouhuo.png","param":"received"},
+      {"name":"退款","icon":"../../images/tuikuan.png","param":"refund"}
     ]
     this.setData({order:data})
   },
 
-  /**
-   * 更新用户头像等信息
-   */
-  getUserInfo: function(e) {
-    if(!e.detail.userInfo) {
-      return
-    }
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({user: e.detail.userInfo})
-    // 更新用户数据
-    const url = api.sync + '?token=' + app.globalData.token
-    wx.request({
-      url: url,
-      method: 'POST',
-      data: e.detail.userInfo
-    })
-  }
 
 })

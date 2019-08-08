@@ -19,7 +19,7 @@ Page({
     const url = api.search
     wx.request({
       url: url,
-      success: (res)=>self.setData({keywords:res.data.data})
+      success: (res)=>self.setData({keywords:res.data.data.keywords})
     })
   },
 

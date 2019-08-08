@@ -1,31 +1,47 @@
 <!-- 标签页 -->
 <view class="nav">
   <text bindtap="setActive" data-value="people"
-    class="{{active == 'people' && 'nav_active'}}">人群</text>
+    class="{{active == 'people' && 'nav_active border-primary'}}">邀请列表</text>
   <text bindtap="setActive" data-value="from"
-    class="{{active == 'from' && 'nav_active'}}">积分来源</text>
+    class="{{active == 'from' && 'nav_active border-primary'}}">积分来源</text>
   <text bindtap="setActive" data-value="to"
-    class="{{active == 'to' && 'nav_active'}}">积分使用</text>
+    class="{{active == 'to' && 'nav_active border-primary'}}">积分使用</text>
 </view>
-
 <view class="container">
 
   <!-- 积分 -->
-  <view class="main">
-    <view><text class="point">{{point}}</text></view>
-    <view><text>获取积分</text></view>
+  <view class="main bg-primary">
+    <view><text style="color:white;">积分：</text><text class="point">{{point}}</text></view>
+    <!--navigator url="/pages/jifenguize/jifenguize"><text>获取积分</text></navigator-->
+    <button plain="true" size="mini" bindtap="onGoLog" 
+      style="color:white;border-radius:15px;border-color:white;font-size:12px;margin-top:5px;">积分明细</button>
   </view>
 
   <!-- 团队 -->
   <scroll-view class="log-container" wx:if="{{active == 'people'}}">
+    <view style="margin:10px 0;color:#ff5151" 
+      wx:if="{{team.higher}}">服务我的是</view>
+    <view class="log-item row" wx:if="{{team.higher}}">
+      <image src="{{team.higher.avatarUrl}}"
+        style="width:42px;height:42px;border-radius:50%;margin-right:10px" />
+      <view style="flex-grow:1;display:flex;justify-content:space-between;align-items:center;">
+        <view class="h4">{{team.higher.nickName}}</view>
+        <text style="float:right;">id:{{team.higher.user_id}}</text>
+      </view>
+    </view>
+    <view style="margin:10px 0;color:#ff5151" 
+      wx:if="{{team.lower.length > 0}}">我服务的是</view>
     <view class="log-item row"
-      wx:if="{{team.length > 0}}"
-      wx:for="{{team}}"
+      wx:if="{{team.lower.length > 0}}"
+      wx:for="{{team.lower}}"
       wx:key="{{index}}">
       <image 
         src="{{item.avatarUrl}}" 
         style="width:42px;height:42px;border-radius:50%;margin-right:10px" />
-      <view class="h4">{{item.nickName}}</view>
+      <view style="flex-grow:1;display:flex;justify-content:space-between;align-items:center;">
+        <view class="h4">{{item.nickName}}</view>
+        <text style="float:right;">id:{{item.user_id}}</text>
+      </view>
     </view>
     <view 
       wx:if="{{team.length == 0}}"
@@ -36,17 +52,20 @@
   <scroll-view class="log-container" wx:if="{{active == 'from'}}">
     <view 
       class="log-item row row_between"
-      wx:if="{{log}}"
-      wx:for="{{log}}"
-      wx:key="{{index}}">
+      wx:if="{{logFrom}}"
+      wx:for="{{logFrom}}"
+      wx:key="**this">
       <view>
-        <view class="h4">{{item.desc}}</view>
-        <view class="small text-grey">2018/10/12</view>
+        <view style="display:flex;align-items:center;">
+        <image src="{{item.buyer.avatarUrl}}" style="width:40px;height:40px;border-radius:40px" />
+        <view class="h4">{{item.buyer.nickName}} ID:{{item.buyer.user_id}}   {{item.remark}}</view>
+        </view>
+        <view class="small text-grey">{{item.create_time}}</view>
       </view>
-      <text class="h2">{{item.money}}</text>
+      <text class="h2">{{item.money}} <text style="font-weight:normal;font-size:12px;">积分</text></text>
     </view>
     <view 
-      wx:if="{{team.length == 0}}"
+      wx:if="{{logFrom.length == 0}}"
       class="mt20 text-center">这里什么都没有</view>
   </scroll-view>
 
@@ -54,17 +73,17 @@
   <scroll-view class="log-container" wx:if="{{active == 'to'}}">
     <view 
       class="log-item row row_between"
-      wx:if="{{log}}"
-      wx:for="{{log}}"
-      wx:key="{{index}}">
+      wx:if="{{logTo}}"
+      wx:for="{{logTo}}"
+      wx:key="**this">
       <view>
         <view class="h4">{{item.desc}}</view>
-        <view class="small text-grey">2018/10/12</view>
+        <view class="small text-grey">{{item.create_time}}</view>
       </view>
-      <text class="h2">{{item.money}}</text>
+      <text class="h2">{{item.money}} <text style="font-weight:normal;font-size:12px;">积分</text></text>
     </view>
     <view 
-      wx:if="{{team.length == 0}}"
+      wx:if="{{logTo.length == 0}}"
       class="mt20 text-center">这里什么都没有</view>
   </scroll-view>
 </view>

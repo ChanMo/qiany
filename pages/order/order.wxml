@@ -1,5 +1,21 @@
 <scroll-view>
 
+  <!-- 最新物流 -->
+  <!--view class="delivery">
+    <view style="font-size:14px;margin-bottom:5px"
+      class="text-primary">最新物流</view>
+    <view
+      hover-class="none"
+      class="delivery__main" 
+      url="/pages/delivery/delivery">
+      <image src="https://img.alicdn.com/imgextra/i2/TB2Z_AouFkoBKNjSZFkXXb4tFXa_!!0-juitemmedia.jpg_270x270.jpg" />
+      <view style="margin-left:10px;">
+        <view class="text-primary" style="font-size:12px;">已揽件</view>
+        <view class="text-grey" style="font-size:12px;">【上海市】哈哈区已收件</view>
+      </view>
+    </view>
+  </view-->
+
   <!-- 收货地址 -->
   <view class="address-container">
     <view>
@@ -19,40 +35,60 @@
       url="/pages/commodity/commodity?id={{item.goods_id}}">
       <image 
         src="{{item.image.file_path}}"
-        style="width:120px;height:120px;" />
-      <view style="flex-grow:1;padding-left:10px;">
-        <view style="font-size:14px;">{{item.goods_name}}</view>
-        <view class="small text-grey">{{item.goods_attr}}</view>
-        <view class="text-small text-grey">x{{item.total_num}}</view>
-        <view class="price">{{item.total_price}}</view>
+        style="min-width:120px;width:120px;height:120px;" />
+      <view style="flex-grow:1;padding-left:10px;display:flex;justify-content:space-between;flex-direction:column">
+        <view>
+          <view>
+            <text class="label">自营</text>
+            <text style="font-weight:bold;">{{item.goods_name}}</text>
+          </view>
+          <view class="small text-grey">{{item.goods_attr}}<text class="text-small text-grey">  x{{item.total_num}}</text></view>
+        </view>
+        <view class="price">
+          <text class="price">￥{{item.goods_price}}</text>
+          <text style="margin-left:10px;color:red;font-size:12px;">商品已包税</text>
+        </view>
       </view>
     </navigator>
   </view>
 
   <!-- 订单其他信息 -->
   <view class="section">
-    <view>运费: {{order.express_price}}</view>
-    <view>总金额: {{order.total_price}}</view>
-    <view>支付金额: {{order.pay_price}}</view>
+    <view>税费<text class="float-right" style="font-weight:bold">+￥0.00</text></view>
+    <view>运费<text class="float-right" style="font-weight:bold">+￥{{order.express_price}}</text></view>
+    <view>使用积分<text class="float-right"><text class="red">{{order.integral}}</text>积分</text></view>
+    <view>抵扣金额<text class="float-right red">-￥{{order.integral_money}}</text></view>
+    <view>商品总额<text class="float-right red">￥{{order.total_price}}</text></view>
+    <view>合计金额<text class="float-right red">￥{{order.pay_price}}</text></view>
+    <view>获得积分
+      <image bindtap="onGoPage" data-id="1"
+        src="/images/i.png" 
+        style="width:12px;height:12px;vertical-align:middle" />
+      <view class="float-right">
+        <text class="red">{{point}}</text>积分
+      </view>
+    </view>
     <view>订单编号: {{order.order_no}}</view>
+    <view>订单状态: {{order.order_status.text}}</view>
     <view>创建时间: {{order.create_time}}</view>
   </view>
 
   <!-- 订单操作 -->
   <view style="padding:20px;">
-    <navigator wx:if="{{order.pay_status.value == 10}}" 
+    <view wx:if="{{order.pay_status.value == 10 && order.order_status.value != 20}}" 
       class="button button-block button-primary mb20"
-      url="/pages/pay/pay?amount={{order.pay_price}}&order={{id}}">去支付</navigator>
-    <navigator wx:if="{{order.pay_status.value == 10}}" 
+      bindtap="pay">去支付</view>
+    <navigator wx:if="{{order.pay_status.value == 10 && order.order_status.value != 20}}" 
       class="button button-block button-grey mb20"
       url="/pages/cancel/cancel?order={{id}}">取消订单</navigator>
-    <navigator wx:if="{{order.pay_status.value == 20 && order.delivery_status.value == 10}}" 
-      class="button button-block button-grey mb20"
+    <navigator wx:if="{{order.pay_status.value == 20 && order.delivery_status.value == 10 && order.order_status.value != 40}}" 
+      class="button button-grey mb20"
+      style="padding:8px 15px !important;font-size:12px;float:right"
       url="/pages/refund/refund?order={{id}}">退款</navigator>
-    <navigator wx:if="{{order.delivery_status.value == 20}}" 
+    <navigator wx:if="{{order.delivery_status.value == 20 && order.order_status.value != 30}}" 
       class="button button-block button-grey mb20"
       url="/pages/delivery/delivery?order={{id}}">查看物流</navigator>
-    <navigator wx:if="{{order.delivery_status.value == 20}}" 
+    <navigator wx:if="{{order.delivery_status.value == 20 && order.order_status.value != 30}}" 
       class="button button-block button-primary mb20"
       url="/pages/confirm/confirm?order={{id}}">确认收货</navigator>
   </view>

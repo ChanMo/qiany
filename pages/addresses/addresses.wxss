@@ -18,7 +18,6 @@
 .edit {
   border-left:1px solid lightgrey;
   padding-left:15px;
-  color: darkgrey;
 }
 .action {
   position: fixed;
