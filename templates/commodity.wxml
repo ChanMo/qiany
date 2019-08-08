@@ -2,15 +2,19 @@
   <navigator 
     class="commodity" 
     url="/pages/commodity/commodity?id={{id}}"
-    style="padding:5px;background:white;width:calc((100vw - {{out*2}}px) / {{flex}});box-sizing:border-box;float:left;">
+    style="padding:5px;width:calc((100vw - {{out*2}}px) / {{flex}});box-sizing:border-box;float:left;margin-bottom:0;">
+    <view style="background:white;border-radius:5px;overflow:hidden;">
     <image 
       src="{{cover}}" 
       style="width:calc((100vw - {{out*2}}px) / {{flex}} - 10px);height:calc((100vw - {{out*2}}px) / {{flex}} - 10px)" />
+    <view style="padding:5px;box-sizing:border-box;">
     <view style="line-height:16px;height:35px;overflow:hidden;">
       <text style="font-size:12px;">{{name}}</text></view>
     <view>
       <text class="price" style="font-size:10px;">￥</text>
       <text class="price">{{price}}</text>
     </view>
+  </view>
+  </view>
   </navigator>
 </template>

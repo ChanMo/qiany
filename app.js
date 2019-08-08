@@ -4,9 +4,13 @@ const api = require('./api')
 App({
   globalData: {
     userInfo: null,
-    p: 0, // 推广人ID
+    p: -1, // 推广人ID
+    currentP: 0, // 当前推广人ID
+    currentPName: '',
     uid: 0, // 用户ID
-    token: null
+    token: null,
+    countryid: 0,
+    countryname: '中国',
   },
 
   /**
@@ -14,7 +18,7 @@ App({
    */
   onLaunch: function (options) {
     if(options.query.p) {
-      this.globalData.p = options.query.p
+      this.globalData.p = parseInt(options.query.p)
     }
     this._login()
   },
@@ -31,7 +35,9 @@ App({
           if(res.data.code > 0) {
             self.globalData.token = res.data.data.token
             self.globalData.uid = res.data.data.user_id
-            //wx.setStorageSync('token', res.data.data.token)
+            self.globalData.currentP = res.data.data.pid
+            self.globalData.currentPName = res.data.data.pname
+            wx.setStorageSync('token', res.data.data.token)
             self._getUserInfo()
           } else {
             wx.showToast({title:'登录失败'})
@@ -53,7 +59,6 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-
               const url = api.sync + '?token=' + this.globalData.token
               wx.request({
                 url: url,

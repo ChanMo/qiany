@@ -1,4 +1,5 @@
 const domain = "https://api.uaiworld.com/index.php/v1/"
+//const domain = "http://local.daigouapi.com/index.php/v1/"
 const api = {
   "login": domain + "user/login",
   "sync": domain + "user/userInfo",
@@ -26,6 +27,23 @@ const api = {
   "search": domain + "goods/top_search",
   "point": domain + "user.distribution/index",
   "pointLog": domain + "user.distribution/detail",
-  "team": domain + "user.distribution/team"
+  "pointFrom": domain + "user.distribution/source",
+  "pointTo": domain + "user.distribution/bestow",
+  "team": domain + "user.distribution/team",
+  "address": domain + "address/lists",
+  "addressadd": domain + "address/add",
+  "addressdetail": domain + "address/detail",
+  "addressedit": domain + "address/edit",
+  "addressdelete": domain + "address/delete",
+  "addressdefault": domain + "Address/getDefaultAddress",
+  "weitaolist": domain + "Weitao/lists",
+  "weitaodetail": domain + "Weitao/detail",
+  "country": domain + "user/update_country",
+  "authList": domain + "user.info/lists",
+  "createAuth": domain + "user.info/add",
+  "updateAuth": domain + "user.info/edit",
+  "upload": domain + "upload/image",
+  "blogList": domain + "micro/lists",
+  "blog": domain + "micro/detail"
 }
 module.exports = api
